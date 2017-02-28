@@ -1,7 +1,7 @@
 <html>
 <head>
-<!--  <script src="js/bettermain.js"></script> -->
-  <script src="js/main.js"></script>
+  <script src="js/bettermain.js"></script>
+<!--  <script src="js/main.js"></script>-->
 </head>
 <body>
   <div class="container" style="width: 1000px; margin-left: auto; margin-right: auto;">
