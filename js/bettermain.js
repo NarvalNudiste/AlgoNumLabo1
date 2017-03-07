@@ -1,4 +1,4 @@
-function Float(_input){
+function Float(_input, _nBits){
   //ctor
   this.value = _input;
   this.mantissa = 0;
@@ -9,7 +9,7 @@ function Float(_input){
   this.encodedExponent = "";
   this.sizeMantissa = 23;
   this.sizeExponent = 8;
-  this.bitSize = 7;
+  this.bitSize = _nBits;
   this.bias = 0;
 
   this.adjustBits = function(){
@@ -26,12 +26,12 @@ function Float(_input){
 		var e = parseInt((3*(Math.log(a/8)/Math.log(2)) + 2));
 		}
 		var m = parseInt(a-e-1);
-		alert("e : " + e + ", m : " + m);
+		//alert("e : " + e + ", m : " + m);
 		
 		this.sizeExponent = e;
 		this.sizeMantissa = m;
 		this.bias = Math.pow(2,this.sizeExponent-1) -1;
-		console.log("exponent size:" + this.sizeExponent + " mantissa size: " + this.sizeMantissa);
+		//console.log("exponent size:" + this.sizeExponent + " mantissa size: " + this.sizeMantissa);
 	}
 	else {
 		alert("not a number...");
@@ -67,18 +67,18 @@ function Float(_input){
   }
 
   this.approximateBinaryMantissa = function(_input){
-	  console.log(_input);
+	//console.log(_input);
     result = "";
     approx = 0;
     /*todo : fix approximation */
       for (i = 1; i < this.sizeMantissa+1; i++){
         if ((approx + Math.pow(2,- i)) <= _input){
-          console.log(">" + i + " - " + (approx + Math.pow(2,-i)) + " < " + _input + ", poce bleu");
+          //console.log(">" + i + " - " + (approx + Math.pow(2,-i)) + " < " + _input + ", poce bleu");
           approx += Math.pow(2,-i);
           result += "1";
         }
       else{
-          console.log(">" + i + " - " + (approx + Math.pow(2,-i)) +" > " + _input + ", poce rouge");
+          //console.log(">" + i + " - " + (approx + Math.pow(2,-i)) +" > " + _input + ", poce rouge");
           result += "0";
       }
     }
@@ -91,12 +91,12 @@ function Float(_input){
     sum = 0;
     for (i = this.sizeExponent-1; i >= 0; i --){
       if (Math.pow(2, i) <= Math.abs(_input)){  /*fix me pls*/
-        console.log((sum + Math.pow(2, i)) + " <= " + _input)
+        //console.log((sum + Math.pow(2, i)) + " <= " + _input)
         _input -= Math.pow(2,i);
         result += "1";
       }
       else{
-        console.log((sum + Math.pow(2, i)) + " > " + _input)
+        //console.log((sum + Math.pow(2, i)) + " > " + _input)
         result += "0";
       }
     }
@@ -134,15 +134,23 @@ function Float(_input){
   this.validate = function(){
 	return !isNaN(this.value);
   }
+  
+  this.convert = function(){
+		if (this.validate() == true){
+		this.adjustBits();
+		this.encode();
+		//this.print();
+		return this.sign + this.encodedExponent + this.encodedMantissa;
+		}
+		else{
+			console.log("exception : input isn't a number");
+		}
+	}
 }
 
-foo = new Float(0.085);
-if (foo.validate() == true){
-	foo.adjustBits();
-	foo.encode();
-	foo.print();
-
-}
-else{
-	console.log("exception : input isn't a number");
-}
+/*
+>> exemple d'utilisation 
+var floatExemple = new Float(0.085, 5);
+var converted = floatExemple.convert();
+console.log(converted);
+*/
