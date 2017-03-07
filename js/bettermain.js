@@ -9,8 +9,35 @@ function Float(_input){
   this.encodedExponent = "";
   this.sizeMantissa = 23;
   this.sizeExponent = 8;
-  this.bias = Math.pow(2,this.sizeExponent-1) -1;  //to change
+  this.bitSize = 7;
+  this.bias = 0;
 
+  this.adjustBits = function(){
+	var scan = this.bitSize;
+	var a = parseInt(scan, 10);
+	if(!isNaN(a)) {
+		// je dois donner d, e et m
+		// la fonction : 4 log2(N) - 13 (arrondit) sauf pour 32(7) -> 8 et 16(3) -> 5
+		if(a >= 180) {
+			var e = parseInt((4*(Math.log(a)/Math.log(2)) - 13));
+		}
+		else if(a>0) {
+		//2+3*(log(n/8)/log(2))+1
+		var e = parseInt((3*(Math.log(a/8)/Math.log(2)) + 2));
+		}
+		var m = parseInt(a-e-1);
+		alert("e : " + e + ", m : " + m);
+		
+		this.sizeExponent = e;
+		this.sizeMantissa = m;
+		this.bias = Math.pow(2,this.sizeExponent-1) -1;
+		console.log("exponent size:" + this.sizeExponent + " mantissa size: " + this.sizeMantissa);
+	}
+	else {
+		alert("not a number...");
+		}
+  }
+  
   //methods
   this.getSign = function(){
 
@@ -97,7 +124,7 @@ function Float(_input){
     this.sign + this.encodedExponent + this.encodedMantissa);
   }
   this.encode = function(){
-    this.getSign();
+    this.getSign();-
     this.convertToBinary();
     this.encodedMantissa = this.approximateBinaryMantissa(this.mantissa-1);
     this.encodedExponent = this.convertExponentToBinary(this.bias + this.exponent);
@@ -109,10 +136,12 @@ function Float(_input){
   }
 }
 
-foo = new Float(1.2);
+foo = new Float(0.085);
 if (foo.validate() == true){
+	foo.adjustBits();
 	foo.encode();
-	foo.print();	
+	foo.print();
+
 }
 else{
 	console.log("exception : input isn't a number");
