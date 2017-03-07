@@ -40,17 +40,18 @@ function Float(_input){
   }
 
   this.approximateBinaryMantissa = function(_input){
+	  console.log(_input);
     result = "";
     approx = 0;
     /*todo : fix approximation */
       for (i = 1; i < this.sizeMantissa+1; i++){
-        if ((approx + Math.pow(2,-i)) < _input){
-          console.log(Math.pow(2,-i) + " < " + _input + ", appending 1");
+        if ((approx + Math.pow(2,- i)) <= _input){
+          console.log(">" + i + " - " + (approx + Math.pow(2,-i)) + " < " + _input + ", poce bleu");
           approx += Math.pow(2,-i);
           result += "1";
         }
       else{
-          console.log(Math.pow(2,-i) +" > " + _input + ", appending 0");
+          console.log(">" + i + " - " + (approx + Math.pow(2,-i)) +" > " + _input + ", poce rouge");
           result += "0";
       }
     }
@@ -68,7 +69,7 @@ function Float(_input){
         result += "1";
       }
       else{
-                console.log((sum + Math.pow(2, i)) + " > " + _input)
+        console.log((sum + Math.pow(2, i)) + " > " + _input)
         result += "0";
       }
     }
@@ -102,8 +103,17 @@ function Float(_input){
     this.encodedExponent = this.convertExponentToBinary(this.bias + this.exponent);
 
   }
+  
+  this.validate = function(){
+	return !isNaN(this.value);
+  }
 }
 
-foo = new Float(1.5);
-foo.encode();
-foo.print();
+foo = new Float(1.2);
+if (foo.validate() == true){
+	foo.encode();
+	foo.print();	
+}
+else{
+	console.log("exception : input isn't a number");
+}
