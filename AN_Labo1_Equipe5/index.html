@@ -13,11 +13,12 @@ Groupe N°5:
 	<title>TODO supply a title</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="js/bettermain.js"></script>
 	<script src="js/decimalToBinary.js"></script>
 	<script src="js/BinaryToDecimal.js"></script>
 	<script src="js/Addition.js"></script>
 	<script src="js/Validation.js"></script>
+	<link href="style/style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
 </head>
 
 <body>
@@ -40,19 +41,25 @@ Groupe N°5:
 	{
 		var data = parseFloat($('decimalToBinary').value);
 		let size =checkValue();
-
+		if (!data){
+			data = 3.1415;
+		}
 		const temp = new DecimalToBinary(data,size);
 		let result = temp.totalBin();
-		$("resultDecToBin").innerHTML = "Resultat : " + result;
+
+		$("resultDecToBin").innerHTML = "Result : " + result;
 	}
 
 	function binToDec()
 	{
 		let data = $('binaryToDecimal').value;
 		let size = checkValue();
+		if (!data){
+			data = "01000000010010010000111001010110";
+		}
 		const temp = new BinaryToDecimal(data,size);
 		let result = temp.decTotal();
-		$("resultBinToDec").innerHTML = "Resultat : " + result;
+		$("resultBinToDec").innerHTML = "Result : " + result;
 
 	//	alert(a);
 	}
@@ -90,31 +97,34 @@ Groupe N°5:
 	}
 
 	</script>
-	<h1>AlgoNum - Labo 1 - Groupe 5</h1>
-	<h3>Bit Number</h3>
-	<input type="number" id="bitNumber" name="bitNumber" step="1" min="7"/>
+	<div class="container">
+		<h1 class="red">AlgoNum - Labo 1 - Groupe 5</h1>
+		<h3>Bit number</h3>
+		<input type="number" id="bitNumber" name="bitNumber" step="1" min="7"/>
 
-	<h3>Decimal To Binary</h3>
+		<h3>Decimal to binary</h3>
 
-	<input type="text" name="decimalToBinary" value="" id="decimalToBinary"/>
-	<input type="submit" value="Convert" onclick="decToBin()"/>
-	<p id="resultDecToBin"></p>
+		<input type="text" name="decimalToBinary" value="" id="decimalToBinary"/>
+		<input type="submit" value="Convert" onclick="decToBin()"/>
+		<p id="resultDecToBin"></p>
 
-	<h3>Binary To Decimal</h3>
+		<h3>Binary to decimal</h3>
 
-	<input type="text" name="binaryToDecimal" value="" id="binaryToDecimal"/>
-	<input type="submit" value="Convert" onclick="binToDec()"/>
-	<p id="resultBinToDec"></p>
+		<input type="text" name="binaryToDecimal" value="" id="binaryToDecimal"/>
+		<input type="submit" value="Convert" onclick="binToDec()"/>
+		<p id="resultBinToDec"></p>
 
-	<h3>Addition</h3>
+		<h3>Addition</h3>
 
-	<label>Float N°1</label>
-	<input type="text" id="float1" name="float2" step="any" />
-	<br />
-	<label>Float N°2</label>
-	<input type="text" id="float2" name="float2" step="any" />
-	<br />
-	<input type="submit" value="Calcul" onclick="addition()"/>
-	<p id="resultAddition"></p>
+		<label>Float N°1</label>
+		<input type="text" id="float1" name="float2" step="any" />
+		<br />
+		<label>Float N°2</label>
+		<input type="text" id="float2" name="float2" step="any" />
+		<br />
+		<input style="margin-top: 1.0em" type="submit" value="Proceed" onclick="addition()"/>
+		<p id="resultAddition"></p>
+	</div>
+
 </body>
 </html>

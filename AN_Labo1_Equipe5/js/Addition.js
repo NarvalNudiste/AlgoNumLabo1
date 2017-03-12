@@ -64,9 +64,12 @@ c("avant "+tempExpoFinal);
 			c(tempExpoFinal);
 
 			if(result.charAt(0)==="1"){
+				let check = result.substring(0,3);
 				result = result.substr(1);
 				result = result.substring(0, result.length-2);
-				if(result.charAt(0)==="1"){
+				c(check);
+				if(check==="101"||check==="100"){
+
 					tempExpoFinal = this.overflowMantissa(tempExpoFinal);
 				}
 
