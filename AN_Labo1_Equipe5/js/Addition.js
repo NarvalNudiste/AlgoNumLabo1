@@ -66,8 +66,10 @@ c("avant "+tempExpoFinal);
 			if(result.charAt(0)==="1"){
 				result = result.substr(1);
 				result = result.substring(0, result.length-2);
+				if(result.charAt(0)==="1"){
+					tempExpoFinal = this.overflowMantissa(tempExpoFinal);
+				}
 
-				tempExpoFinal = this.overflowMantissa(tempExpoFinal);
 			}else{
 
 				result = result.substr(2);

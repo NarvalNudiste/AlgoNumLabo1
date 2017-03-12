@@ -41,6 +41,7 @@ class BinaryToDecimal {
 			if(roudedMantissa.length > this.sizeMantissa){
 				let overflowMantissa = roudedMantissa;
 				overflowMantissa = overflowMantissa.substring(0,1);
+
 				if(overflowMantissa==="1"){
 					this.overflowMantissa();
 				}
