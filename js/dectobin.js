@@ -143,14 +143,18 @@ function Float(_input, _nBits){
 		return this.sign + this.encodedExponent + this.encodedMantissa;
 		}
 		else{
-			console.log("exception : input isn't a number");
+      console.log("exception : input isn't a number");
+      return "error : invalid input";
 		}
 	}
 }
 
 function convertToBinary(){
-  var toConvert = document.getElementById('decToBin').value;
-  alert(toConvert);
+  var toConvert = document.getElementById('decField').value;
+  var bitNumber = document.getElementById('bitNumber').value;
+  var foo = new Float(toConvert, bitNumber);
+  var converted = foo.convert();
+  document.getElementById('binField').value = converted;
 }
 
 /*
