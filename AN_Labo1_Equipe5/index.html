@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+Algo Num - Labo 1
+
+Groupe N°5:
+- Gillioz Anthony
+- Noguera Guillaume
+- Gahlinger Deni
+- Feuillade Julien
+-->
+<html>
+<head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/bettermain.js"></script>
+	<script src="js/decimalToBinary.js"></script>
+	<script src="js/BinaryToDecimal.js"></script>
+	<script src="js/Addition.js"></script>
+	<script src="js/Validation.js"></script>
+</head>
+
+<body>
+	<script>
+	function c(_data){
+		console.log(_data);
+	}
+	function checkValue(){
+		var n = parseInt($('bitNumber').value);
+		let size;
+		if(!isNaN(n)&&n>=7){
+			size = new Validation(n);
+		}else{
+			size = new Validation(32);
+			alert("Le nombre de bits n'est pas valide.\nIl sera de 32 bits par défaut.");
+		}
+		return size;
+	}
+	function decToBin()
+	{
+		var data = parseFloat($('decimalToBinary').value);
+		let size =checkValue();
+
+		const temp = new DecimalToBinary(data,size);
+		let result = temp.totalBin();
+		$("resultDecToBin").innerHTML = "Resultat : " + result;
+
+	}
+
+	function binToDec()
+	{
+		let data = $('binaryToDecimal').value;
+		let size = checkValue();
+		const temp = new BinaryToDecimal(data,size);
+		let result = temp.decTotal();
+		$("resultBinToDec").innerHTML = "Resultat : " + result;
+
+	//	alert(a);
+	}
+
+	function addition()
+	{
+		var a = parseInt($('bitNumber').value);
+		var data1 = parseFloat($('float1').value);
+		var data2 = parseFloat($('float2').value);
+
+		let size = checkValue();
+
+		const temp1 = new DecimalToBinary(data1,size);
+		const temp2 = new DecimalToBinary(data2,size);
+		var data1Bin = temp1.totalBin();
+		var data2Bin = temp2.totalBin();
+
+		const addition = new Addition(data1Bin,data2Bin,size);
+		let resultBin = addition.total();
+
+		c("resr " + resultBin);
+
+		const tempRes = new BinaryToDecimal(resultBin,size);
+		let result = tempRes.decTotal();
+
+
+		$("resultAddition").innerHTML = "Resultat : " + result;
+
+
+	}
+
+	function $(_id)
+	{
+		return document.getElementById(_id);
+	}
+
+	</script>
+	<h1>AlgoNum - Labo 1 - Groupe 5</h1>
+	<h3>Bit Number</h3>
+	<input type="number" id="bitNumber" name="bitNumber" step="1" min="7"/>
+
+	<h3>Decimal To Binary</h3>
+
+	<input type="text" name="decimalToBinary" value="" id="decimalToBinary"/>
+	<input type="submit" value="Convert" onclick="decToBin()"/>
+	<p id="resultDecToBin"></p>
+
+	<h3>Binary To Decimal</h3>
+
+	<input type="text" name="binaryToDecimal" value="" id="binaryToDecimal"/>
+	<input type="submit" value="Convert" onclick="binToDec()"/>
+	<p id="resultBinToDec"></p>
+
+	<h3>Addition</h3>
+
+	<label>Float N°1</label>
+	<input type="text" id="float1" name="float2" step="any" />
+	<br />
+	<label>Float N°2</label>
+	<input type="text" id="float2" name="float2" step="any" />
+	<br />
+	<input type="submit" value="Calcul" onclick="addition()"/>
+	<p id="resultAddition"></p>
+</body>
+</html>
