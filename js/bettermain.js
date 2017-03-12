@@ -27,7 +27,7 @@ function Float(_input, _nBits){
 		}
 		var m = parseInt(a-e-1);
 		//alert("e : " + e + ", m : " + m);
-		
+
 		this.sizeExponent = e;
 		this.sizeMantissa = m;
 		this.bias = Math.pow(2,this.sizeExponent-1) -1;
@@ -37,7 +37,7 @@ function Float(_input, _nBits){
 		alert("not a number...");
 		}
   }
-  
+
   //methods
   this.getSign = function(){
 
@@ -124,17 +124,17 @@ function Float(_input, _nBits){
     this.sign + this.encodedExponent + this.encodedMantissa);
   }
   this.encode = function(){
-    this.getSign();-
+    this.getSign();
     this.convertToBinary();
     this.encodedMantissa = this.approximateBinaryMantissa(this.mantissa-1);
     this.encodedExponent = this.convertExponentToBinary(this.bias + this.exponent);
 
   }
-  
+
   this.validate = function(){
 	return !isNaN(this.value);
   }
-  
+
   this.convert = function(){
 		if (this.validate() == true){
 		this.adjustBits();
@@ -148,8 +148,13 @@ function Float(_input, _nBits){
 	}
 }
 
+function convertToBinary(){
+  var toConvert = document.getElementById('decToBin').value;
+  alert(toConvert);
+}
+
 /*
->> exemple d'utilisation 
+>> exemple d'utilisation
 var floatExemple = new Float(0.085, 5);
 var converted = floatExemple.convert();
 console.log(converted);
