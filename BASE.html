@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+Algo Num - Labo 1
+
+Groupe N°5:
+- Gillioz Anthony
+- Noguera Guillaume
+- Gahlinger Deni
+- Feuillade Julien
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+    <script>
+        function DecToBin()
+        {
+            var n = parseInt($('bitNumber').value);
+            var x = parseInt($('decToBin').value);
+            if(n >= 7)
+            {
+
+            }
+            alert(a);
+        }
+
+        function BinToDec()
+        {
+            var a = parseInt($('bitNumber').value);
+            alert(a);
+        }
+
+        function Addition()
+        {
+            var a = parseInt($('bitNumber').value);
+            alert(a);
+        }
+
+        function $(_id)
+        {
+            return document.getElementById(_id);
+        }
+
+    </script>
+        <h1>AlgoNum - Labo 1 - Groupe 5</h1>
+        <h3>Bit Number</h3>
+        <input type="text" name="BitNumber" value="" id="bitNumber" />
+        <h3>Decimal To Binary</h3>
+        <form onsubmit="DecToBin()">
+            <input type="text" name="DecimalToBinary" value="" id="decToBin"/>
+            <input type="submit" value="Convert"/>
+        </form>
+        <h3>Binary To Decimal</h3>
+        <form onsubmit="BinToDec()">
+            <input type="text" name="BinaryToDecimal" value="" id="binToDec"/>
+            <input type="submit" value="Convert" id="binToDecButton" />
+        </form>
+        <h3>Addition</h3>
+        <form onsubmit="Addition()">
+            <label>Float N°1</label>
+            <input type="number" id="float" name="float" step="any" />
+            <br />
+            <label>Float N°2</label>
+            <input type="number" id="float" name="float" step="any" />
+            <br />
+            <input type="submit" value="Convert" />
+        </form>
+    </body>
+</html>
