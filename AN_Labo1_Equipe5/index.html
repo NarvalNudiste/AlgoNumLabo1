@@ -10,7 +10,7 @@ Groupe N°5:
 -->
 <html>
 <head>
-	<title>TODO supply a title</title>
+	<title>AlgoNum - Labo 1 - Équipe 5</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="js/decimalToBinary.js"></script>
@@ -69,7 +69,12 @@ Groupe N°5:
 		var a = parseInt($('bitNumber').value);
 		var data1 = parseFloat($('float1').value);
 		var data2 = parseFloat($('float2').value);
-
+                if (!data1){
+                    data1 = 3.1415;
+                }
+                if (!data2){
+                    data2 = 3.1415;
+                }
 		let size = checkValue();
 
 		const temp1 = new DecimalToBinary(data1,size);
@@ -98,7 +103,15 @@ Groupe N°5:
 
 	</script>
 	<div class="container">
-		<h1 class="red">AlgoNum - Labo 1 - Groupe 5</h1>
+		<h1 class="red">AlgoNum - Labo 1 - Équipe 5</h1>
+		<h3>Mode d'emploi</h3>
+                   <ol>
+                    <li>Remplir la case Bit Number (par défault 32 bits)</li> 
+                    <li>Choisir un nombre décimal puis le convertir en binaire (Decimal to binary)</li>
+                    <li>Choisir un nombre binaire puis le convertir en décimal (Binary to decimal)</li> 
+                    <li>Ajouter deux nombres décimaux (Addition)</li> 
+                    <li>Si l'entrée est invalide, la valeur 3.1415 (et son équivalent binaire) est utilisée par défaut</li>
+                    </ol> 
 		<h3>Bit number</h3>
 		<input type="number" id="bitNumber" name="bitNumber" step="1" min="7"/>
 
