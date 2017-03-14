@@ -47,7 +47,7 @@ class Addition {
 				tempMantissa2 = this.shiftMantissa(tempMantissa2,calcExpo1 - calcExpo2);
 				tempExpoFinal = calcExpo1;
 			}else if (calcExpo1 == calcExpo2) {
-				diffExpo = 1;
+		//		diffExpo = 1;
 			}
 
 			result = this.computeBinary(tempMantissa1,tempMantissa2);
@@ -69,7 +69,6 @@ c("avant "+tempExpoFinal);
 				result = result.substring(0, result.length-2);
 				c(check);
 				if(check==="101"||check==="100"){
-
 					tempExpoFinal = this.overflowMantissa(tempExpoFinal);
 				}
 
