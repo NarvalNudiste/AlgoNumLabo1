@@ -8,7 +8,7 @@
 
 
   <script>
-  var aryY = new Array();
+  var aryY = new Array();   //affichage du graphe
   var aryX = new Array();
   for (let i = 0; i < 200; i++){
     aryX[i] = i-100;
@@ -28,6 +28,19 @@
   };
   var data = [trace1];
   Plotly.newPlot('myDiv', data);
+
+
+  var tabBornes = new Array();
+  var tabResultat = new Array();
+  explore(1, f, tabBornes, tabResultat);
+  getZeros(tabResultat, tabBornes,  0.1**10, f);
+
+
+  c("bornes : ");
+  printDoubleAry(tabBornes);
+  c("resultats : ");
+  printAry(tabResultat);
+
   </script>
 </body>
 </html>
