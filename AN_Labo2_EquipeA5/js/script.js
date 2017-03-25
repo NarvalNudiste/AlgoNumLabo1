@@ -42,9 +42,19 @@ function explore(_step, _f, _bornesAry, _resultAry){  /*explore la fonction et s
 	}
 }
 
-function getZeros(_resultAry, _bornesAry,  _epsilon, _f){ /* applique la dichotomie sur les bornes découvertes avec la fonction explore */
-	for (i = 0; i < _bornesAry.length; i++){
-		let temp = dich(_bornesAry[i][0] , _bornesAry[i][1], _epsilon, _f, i)
+/*
+*	Apply the dichotomy on the limit, found with the explore function.
+*
+*	Arguments :	_resultAry (the array with the final result)
+*				_limitAry (the array with the upper and the lower limit for the dichotomy function)
+*				_epsilon (the precision of the dichotomy function)
+*				_f (the function we want to found the 0 value)
+*
+*	returns :		nothing
+*/
+function getZeros(_resultAry, _limitAry,  _epsilon, _f){
+	for (i = 0; i < _limitAry.length; i++){
+		let temp = dich(_limitAry[i][0] , _limitAry[i][1], _epsilon, _f, i)
 		_resultAry.push(temp);
 	}
 }
@@ -66,9 +76,30 @@ function printAry(_ary){ /* de la chiasse aussi */
 *	Arguments : _x (value to compute)
 *	Returns : Sin(_x)-_x/3
 */
-function f(_x){ /* pls */
+function f(_x){
 	return (Math.sin(_x) - (_x/3));
 }
+
+function fM(_x){
+	let h = math.parse('sin(x)-x/3');
+	return h.eval({x: _x});
+}
+//function with the derivate math
+function dfM(_x){
+	let h = math.parse('sin(x)-x/3');
+	let x = math.parse('x');
+	let dh = math.derivative(h, x);
+	return dh.eval({x: _x});
+}
+//function with the double derivate
+function ddfM(_x){
+	let h = math.parse('sin(x)-x/3');
+	let x = math.parse('x');
+	let dh = math.derivative(h, x);
+	let ddh = math.derivative(dh, x);
+	return ddh.eval({x: _x});
+}
+
 
 /*
 *	Second function of the laboratory
@@ -87,15 +118,10 @@ function c(data){   /* le truc à Anthony */
 	console.log(data);
 }
 
-function getPlotPoints(_f){ //plots the function
-	let i = -100;
-	var ary = new Array(200);
-	for (i; i < 100; i++){
-		ary[i+100] = _f(i);
-	}
-	return ary;
-}
 
-function computeStep(_){
 
+function computeStep(_x){
+	let temp = (2/(math.exp(-ddfM(_x)*fM(_x))+1))*(2/(math.exp(-dfM(_x)*fM(_x))+1));
+	//"2/(E^(-F''[x]*F[x]) + 1) 2/(E^(-F'[x]*F[x]) + 1)";
+	return temp;
 }

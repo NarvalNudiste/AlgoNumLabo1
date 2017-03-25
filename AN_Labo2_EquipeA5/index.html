@@ -1,14 +1,12 @@
 <html>
 <head>
 	<script type="text/javascript" src="js/script.js"></script>
-	<!--<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>-->
-	<!--<script src="https://wzrd.in/standalone/function-plot@1.17.3"></script>-->
+	<script type="text/javascript" src="js/math.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="http://maurizzzio.github.io/function-plot/js/function-plot.js"></script>
 
 </head>
 <body>
-	<!--<div id="myDiv" width="400" height="400"></div>-->
 	<div id="demo"></div>
 
 	<script>
@@ -24,39 +22,32 @@
 			}
 		}]
 	});
-	/*var aryY = new Array();   //affichage du graphe
-	var aryX = new Array();
-	for (let i = 0; i < 200; i++){
-	aryX[i] = i-100;
-}
 
-aryY = getPlotPoints(f);
-c(aryY[40]);
-var trace1 = {
-x: aryX,
-y: aryY,
-type: 'scatter'
-};
-var trace2 = {
-x: [1, 2, 3, 4],
-y: [16, 5, 11, 9],
-type: 'scatter'
-};
-var data = [trace1];
-Plotly.newPlot('myDiv', data);*/
+	let toto = -100;
+	let temp =0;
+	//c(computeStep(toto));
+	while(toto<-90){
+		temp = computeStep(toto);
+		if(temp < 0.1){
+			temp = 0.1;
+		}
+
+		toto += temp;
+		c(toto);
+	}
 
 
-var tabBornes = new Array();
-var tabResultat = new Array();
-explore(1, f, tabBornes, tabResultat);
-getZeros(tabResultat, tabBornes,  0.1**10, f);
+	var tabBornes = new Array();
+	var tabResultat = new Array();
+	explore(1, f, tabBornes, tabResultat);
+	getZeros(tabResultat, tabBornes,  0.1**10, f);
 
 
-c("bornes : ");
-printDoubleAry(tabBornes);
-c("resultats : ");
-printAry(tabResultat);
+	c("bornes : ");
+	printDoubleAry(tabBornes);
+	c("resultats : ");
+	printAry(tabResultat);
 
-</script>
+	</script>
 </body>
 </html>
