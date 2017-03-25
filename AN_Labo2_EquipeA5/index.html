@@ -25,17 +25,17 @@
 
 	let toto = -100;
 	let temp =0;
-	//c(computeStep(toto));
-	while(toto<-90){
+	let nbLoop = 0;
+	while(toto<0){
+		nbLoop++;
 		temp = computeStep(toto);
 		if(temp < 0.1){
 			temp = 0.1;
 		}
-
 		toto += temp;
 		c(toto);
 	}
-
+	c(nbLoop);
 
 	var tabBornes = new Array();
 	var tabResultat = new Array();
