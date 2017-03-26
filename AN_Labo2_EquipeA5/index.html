@@ -52,9 +52,20 @@
 	}
 	c(nbLoop);*/
 
-	var tabBornes = new Array();
+	/*var tabBornes = new Array();
 	var tabResultat = new Array();
 	explore(1, f, tabBornes, tabResultat);
+	getZeros(tabResultat, tabBornes,  0.1**10, f);
+
+
+	c("bornes : ");
+	printDoubleAry(tabBornes);
+	c("resultats : ");
+	printAry(tabResultat);*/
+
+	var tabBornes = new Array();
+	var tabResultat = new Array();
+	explore2(1, f, tabBornes, tabResultat);
 	getZeros(tabResultat, tabBornes,  0.1**10, f);
 
 

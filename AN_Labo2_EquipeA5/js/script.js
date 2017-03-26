@@ -42,6 +42,41 @@ function explore(_step, _f, _bornesAry, _resultAry){  /*explore la fonction et s
 	}
 }
 
+function explore2(_step, _f, _bornesAry, _resultAry){
+
+	let countLoop = -100;
+	let step =0;
+
+	let func = computefM('sin(x)-x/3');
+	let funcD = computedfM('sin(x)-x/3');
+	let funcDD = computeddfM('sin(x)-x/3');
+
+	while(countLoop<100){
+		step = computeStep(toto);
+		if(step < 0.1){
+			step = 0.1;
+		}
+		countLoop += step;
+		//c(countLoop);
+		if (_f(countLoop) === 0){
+			_resultAry.push(0.0);
+		}
+		if ((_f(countLoop) > 0 && _f(countLoop+step) < 0) || (_f(countLoop) < 0 && _f(countLoop+step) > 0)) {
+			_bornesAry.push(new Array(countLoop, countLoop+step));
+		}
+	}
+
+	/*while(toto<100){
+		nbLoop++;
+		step = computeStep2(toto,func,funcD,funcDD);
+		if(step < 0.01){
+			step = 0.01;
+		}
+		toto += step;
+		//	c(toto);
+	}*/
+}
+
 /*
 *	Apply the dichotomy on the limit, found with the explore function.
 *
