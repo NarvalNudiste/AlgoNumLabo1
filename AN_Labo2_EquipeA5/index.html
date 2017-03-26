@@ -30,17 +30,27 @@
 	let funcD = computedfM('sin(x)-x/3');
 	let funcDD = computeddfM('sin(x)-x/3');
 
-
-	while(toto<0){
+	while(toto<100){
 		nbLoop++;
-		temp = computeStep2(toto,func,funcD,funcDD);
-		if(temp < 0.1){
-			temp = 0.1;
+		temp = computeStep(toto);
+		if(temp < 0.001){
+			temp = 0.001;
 		}
 		toto += temp;
 		//	c(toto);
 	}
 	c(nbLoop);
+
+	/*while(toto<100){
+		nbLoop++;
+		temp = computeStep2(toto,func,funcD,funcDD);
+		if(temp < 0.01){
+			temp = 0.01;
+		}
+		toto += temp;
+		//	c(toto);
+	}
+	c(nbLoop);*/
 
 	var tabBornes = new Array();
 	var tabResultat = new Array();

@@ -89,10 +89,10 @@ function computefMValue(_function,_x){
 /*function fM(_x){
 	let h = math.parse('sin(x)-x/3');
 	return h.eval({x: _x});
-}
+}*/
 function fM(_x){
 	return (Math.sin(_x) - (_x/3));
-}*/
+}
 //function with the derivate math
 function computedfM(_function){
 	let h = math.parse(_function);
@@ -109,9 +109,10 @@ function computedfMValue(_function,_x){
 	let dh = math.derivative(h, x);
 	return dh.eval({x: _x});
 }
+*/
 function dfM(_x){
 	return (Math.cos(_x) - (1/3));
-}*/
+}
 //function with the double derivate
 /*function ddfM(_x){
 	let h = math.parse('sin(x)-x/3');
