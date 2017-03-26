@@ -26,14 +26,19 @@
 	let toto = -100;
 	let temp =0;
 	let nbLoop = 0;
+	let func = computefM('sin(x)-x/3');
+	let funcD = computedfM('sin(x)-x/3');
+	let funcDD = computeddfM('sin(x)-x/3');
+
+
 	while(toto<0){
 		nbLoop++;
-		temp = computeStep(toto);
+		temp = computeStep2(toto,func,funcD,funcDD);
 		if(temp < 0.1){
 			temp = 0.1;
 		}
 		toto += temp;
-		c(toto);
+		//	c(toto);
 	}
 	c(nbLoop);
 
