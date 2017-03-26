@@ -53,26 +53,8 @@ function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
 	let step =0;
 
 	let func = computefM(_funcString);
-	c(func.toString());
 	let funcD = computedfM(_funcString);
-	c(funcD.toString());
 	let funcDD = computeddfM(_funcString);
-	c(funcDD.toString());
-
-/*	while(countLoop<100){
-		step = computeStep(countLoop);
-		if(step < 0.01){
-			step = 0.01;
-		}
-		countLoop += step;
-		//c(countLoop);
-		if (_f(countLoop) === 0){
-			_resultAry.push(0.0);
-		}
-		if ((_f(countLoop) > 0 && _f(countLoop+step) < 0) || (_f(countLoop) < 0 && _f(countLoop+step) > 0)) {
-			_bornesAry.push(new Array(countLoop, countLoop+step));
-		}
-	}*/
 
 	while(countLoop<100){
 		step = computeStep2(countLoop,func,funcD,funcDD);
@@ -140,10 +122,7 @@ function computefM(_function){
 function computefMValue(_function,_x){
 	return _function.eval({x:_x});
 }
-/*function fM(_x){
-	let h = math.parse('sin(x)-x/3');
-	return h.eval({x: _x});
-}*/
+
 function fM(_x){
 	return (Math.sin(_x) - (_x/3));
 }
@@ -157,24 +136,11 @@ function computedfM(_function){
 function computedfMValue(_function,_x){
 	return _function.eval({x: _x});
 }
-/*function dfM(_x){
-	let h = math.parse('sin(x)-x/3');
-	let x = math.parse('x');
-	let dh = math.derivative(h, x);
-	return dh.eval({x: _x});
-}
-*/
+
 function dfM(_x){
 	return (Math.cos(_x) - (1/3));
 }
 //function with the double derivate
-/*function ddfM(_x){
-	let h = math.parse('sin(x)-x/3');
-	let x = math.parse('x');
-	let dh = math.derivative(h, x);
-	let ddh = math.derivative(dh, x);
-	return ddh.eval({x: _x});
-}*/
 function ddfM(_x){
 	return -Math.sin(_x);
 }
