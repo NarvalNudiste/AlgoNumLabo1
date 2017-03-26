@@ -23,11 +23,11 @@ function dich(a,b,epsilon, laFonction, id){
 		}
 	}
 	if (laFonction(mnew) > asymptLimit || laFonction(mnew) < -asymptLimit){
-		return "infinity";
+		return "Asymptote verticale en x = " + mnew;
 	}
 	//  c("medianne # "+ id + " : " + mnew);
 	else{
-		return mnew;
+		return "x = " + mnew;
 	}
 }
 
@@ -38,7 +38,8 @@ function dich(a,b,epsilon, laFonction, id){
 */
 function explore(_step, _f, _bornesAry, _resultAry){  /*explore la fonction et stocke les bornes à explorer dans un tableau; les zéros ainsi découvert sont également insérés dans _resultAry */
 	for (i = -100; i < 99; i+= _step){
-		if (_f(i) === 0){
+		if (_f(i) === 0.0){
+			alert("test");
 			_resultAry.push(0.0);
 		}
 		if ((_f(i) > 0 && _f(i+_step) < 0) || (_f(i) < 0 && _f(i+_step) > 0)) {

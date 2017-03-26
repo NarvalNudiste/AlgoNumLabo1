@@ -44,9 +44,9 @@ Groupe N°5:
 		if(id == "demo")
 		{
 			   document.getElementById("demo").style.display = 'block';
-			   document.getElementById("demo2").style.display = 'none';	
+			   document.getElementById("demo2").style.display = 'none';
 			   final2(functionString,f);
-			   
+
 		}
 		else
 		{
@@ -105,12 +105,13 @@ Groupe N°5:
 	function final2(_functionString,_f){
 		let tabBornes = new Array();
 		let tabResultat = new Array();
-		explore(0.1, _f, tabBornes, tabResultat);
+		explore(1, _f, tabBornes, tabResultat);
 		getZeros(tabResultat, tabBornes,  0.1**10, _f);
 		let rslt = "Résultats </br>";
 		for (i = 0; i < tabResultat.length; i++){
+			rslt += "[" + i + "] "
 			rslt += tabResultat[i];
-			rslt += ' ; ';
+			rslt += '</br>';
 		}
 		document.getElementById('results').innerHTML = rslt;
 
