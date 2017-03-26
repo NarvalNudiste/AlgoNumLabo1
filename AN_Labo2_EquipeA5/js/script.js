@@ -105,12 +105,15 @@ function getZeros(_resultAry, _limitAry,  _epsilon, _f){
 
 function printDoubleAry(_ary){ /* de la chiasse */
 	for (i = 0; i < _ary.length; i ++){
-		c(i + ": [" + _ary[i][0] + ";" + _ary[i][1] + "]");
+		data = i + ": [" + _ary[i][0] + ";" + _ary[i][1] + "] ";
+		c(data);
 	}
 }
 function printAry(_ary){ /* de la chiasse aussi */
 	for (i = 0; i < _ary.length; i ++){
-		c(i + ": [" + _ary[i] + "]");
+		data = i + ": [" + _ary[i] + "] ";
+		c(data);
+		document.writeln(data);
 	}
 }
 
