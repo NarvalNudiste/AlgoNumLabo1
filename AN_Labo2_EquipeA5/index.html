@@ -26,10 +26,18 @@
 	let toto = -100;
 	let temp =0;
 	let nbLoop = 0;
-	let func = computefM('sin(x)-x/3');
-	let funcD = computedfM('sin(x)-x/3');
-	let funcDD = computeddfM('sin(x)-x/3');
-
+	
+	let functionString = 'sin(x)-x/3';
+	let functionString2 = 'x/(1-x^2)';
+	
+	let func = computefM(functionString);
+	let funcD = computedfM(functionString);
+	let funcDD = computeddfM(functionString);
+	
+	let func2 = computefM(functionString2);
+	let func2D = computedfM(functionString2);
+	let func2DD = computeddfM(functionString2);
+	
 	while(toto<100){
 		nbLoop++;
 		temp = computeStep(toto);
@@ -54,8 +62,8 @@
 
 	var tabBornes = new Array();
 	var tabResultat = new Array();
-	explore(1, f, tabBornes, tabResultat);
-	getZeros(tabResultat, tabBornes,  0.1**10, f);
+	explore(1, f2, tabBornes, tabResultat);
+	getZeros(tabResultat, tabBornes,  0.1**10, f2);
 
 
 	c("bornes : ");

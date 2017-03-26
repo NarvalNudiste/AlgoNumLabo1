@@ -22,8 +22,13 @@ function dich(a,b,epsilon, laFonction, id){
 			fa = fm;
 		}
 	}
+	if (laFonction(mnew) > asymptLimit || laFonction(mnew) < -asymptLimit){
+		return "infinity";
+	}
 	//  c("medianne # "+ id + " : " + mnew);
-	return mnew;
+	else{
+		return mnew;	
+	}
 }
 
 /*
@@ -167,3 +172,5 @@ function computeStep2(_x,_func,_funcD,_funcDD){
 	let temp = (2/(Math.pow(2,-resFuncDD*resFunc)+1))*(2/(Math.pow(2,-resFuncD*resFunc)+1));
 	return temp;
 }
+
+var asymptLimit = 8000000000;
