@@ -1,0 +1,53 @@
+<html>
+<head>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/math.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://maurizzzio.github.io/function-plot/js/function-plot.js"></script>
+
+</head>
+<body>
+	<div id="demo"></div>
+
+	<script>
+	functionPlot({
+		target: '#demo',
+
+		xAxis: {domain: [-100, 100]},
+		data: [{
+			fn: 'sin(x)-x/3',
+			derivative: {
+				fn: '2x',
+				updateOnMouseMove: true
+			}
+		}]
+	});
+
+	let toto = -100;
+	let temp =0;
+	let nbLoop = 0;
+	while(toto<0){
+		nbLoop++;
+		temp = computeStep(toto);
+		if(temp < 0.1){
+			temp = 0.1;
+		}
+		toto += temp;
+		c(toto);
+	}
+	c(nbLoop);
+
+	var tabBornes = new Array();
+	var tabResultat = new Array();
+	explore(1, f, tabBornes, tabResultat);
+	getZeros(tabResultat, tabBornes,  0.1**10, f);
+
+
+	c("bornes : ");
+	printDoubleAry(tabBornes);
+	c("resultats : ");
+	printAry(tabResultat);
+
+	</script>
+</body>
+</html>
