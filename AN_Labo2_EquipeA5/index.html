@@ -32,6 +32,8 @@ Groupe N°5:
 		<div id="demo2"></div>
 
 	</div>
+	<div id="results">
+	</div>
 
 	</center>
 
@@ -42,12 +44,15 @@ Groupe N°5:
 		if(id == "demo")
 		{
 			   document.getElementById("demo").style.display = 'block';
-			   document.getElementById("demo2").style.display = 'none';
+			   document.getElementById("demo2").style.display = 'none';	
+			   final2(functionString,f);
+			   
 		}
 		else
 		{
 			   document.getElementById("demo2").style.display = 'block';
 			   document.getElementById("demo").style.display = 'none';
+			   final2(functionString2, f2);
 		}
 	}
 
@@ -81,12 +86,17 @@ Groupe N°5:
 		let tabResultat = new Array();
 		explore2(1, _f, tabBornes, tabResultat,_functionString);
 		getZeros(tabResultat, tabBornes,  0.1**10, _f);
+		let rslt = "Résultats :";
+		for (i = 0; i < tabResultat.length; i++){
+			rslt += tabResultat[i];
+			rslt += ' ; ';
+		}
+		document.getElementById('results').innerHTML = rslt;
 
-
-		c("bornes : ");
-		printDoubleAry(tabBornes);
-		c("resultats : ");
-		printAry(tabResultat);
+		//c("bornes : ");
+		//printDoubleAry(tabBornes);
+		//c("resultats : ");
+		//printAry(tabResultat);
 	}
 
 
@@ -97,12 +107,17 @@ Groupe N°5:
 		let tabResultat = new Array();
 		explore(0.1, _f, tabBornes, tabResultat);
 		getZeros(tabResultat, tabBornes,  0.1**10, _f);
+		let rslt = "Résultats </br>";
+		for (i = 0; i < tabResultat.length; i++){
+			rslt += tabResultat[i];
+			rslt += ' ; ';
+		}
+		document.getElementById('results').innerHTML = rslt;
 
-
-		c("bornes : ");
-		printDoubleAry(tabBornes);
-		c("resultats : ");
-		printAry(tabResultat);
+		//c("bornes : ");
+		//printDoubleAry(tabBornes);
+		//c("resultats : ");
+		//printAry(tabResultat);
 	}
 
 
