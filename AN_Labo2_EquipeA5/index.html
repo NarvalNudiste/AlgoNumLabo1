@@ -1,25 +1,71 @@
+<!DOCTYPE html>
+<!--
+Algo Num - Labo 2
+
+Groupe N°5:
+- Gillioz Anthony
+- Noguera Guillaume
+- Gahlinger Deni
+- Feuillade Julien
+-->
 <html>
 <head>
+	<title>AlgoNum - Labo 2 - Équipe 5</title>
+	<meta charset="UTF-8">
+
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/math.js"></script>
+	<link href="style/style.css" rel="stylesheet">
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="http://maurizzzio.github.io/function-plot/js/function-plot.js"></script>
 
 </head>
 <body>
-	<div id="demo"></div>
+	<center>
+	<div class="container">
+		<h1 class="red">AlgoNum - Labo 2 - Équipe 5</h1>
 
+		<button onclick="masquer_div('demo');">sin(x) - x / 13</button>
+		<button onclick="masquer_div('demo2');">x / (1 - x^2)</button>
+		
+		<div id="demo"></div>
+		<div id="demo2"></div>
+		
+	</div>
+	
+	</center>	
+	
+	<pre>
 	<script>
+	function masquer_div(id)
+	{
+		if(id == "demo")
+		{
+			   document.getElementById("demo").style.display = 'block';
+			   document.getElementById("demo2").style.display = 'none';
+		}
+		else
+		{
+			   document.getElementById("demo2").style.display = 'block';
+			   document.getElementById("demo").style.display = 'none';
+		}
+	}
+		
 	functionPlot({
 		target: '#demo',
 
 		xAxis: {domain: [-100, 100]},
 		data: [{
-			fn: 'sin(x)-x/3',
-			derivative: {
-				fn: '2x',
-				updateOnMouseMove: true
-			}
+			fn: 'sin(x)-x/3'
+		}]
+	});
+	
+	functionPlot({
+		target: '#demo2',
+
+		xAxis: {domain: [-100, 100]},
+		data: [{
+			fn: 'x/(1-x^2)'
 		}]
 	});
 
@@ -79,9 +125,12 @@
 
 	c("bornes : ");
 	printDoubleAry(tabBornes);
+	
+	document.write("\nRacines de la fonction : \n\n");
 	c("resultats : ");
 	printAry(tabResultat);
 
 	</script>
+	</pre>
 </body>
 </html>
