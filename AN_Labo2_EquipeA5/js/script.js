@@ -41,7 +41,7 @@ function explore(_step, _f, _bornesAry, _resultAry){  /*explore la fonction et s
 		if (_f(i) === 0){
 			_resultAry.push(0.0);
 		}
-		if ((_f(i) > 0 && _f(i+1) < 0) || (_f(i) < 0 && _f(i+1) > 0)) {
+		if ((_f(i) > 0 && _f(i+_step) < 0) || (_f(i) < 0 && _f(i+_step) > 0)) {
 			_bornesAry.push(new Array(i, i+1));
 		}
 	}
@@ -53,10 +53,13 @@ function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
 	let step =0;
 
 	let func = computefM(_funcString);
+	c(func.toString());
 	let funcD = computedfM(_funcString);
+	c(funcD.toString());
 	let funcDD = computeddfM(_funcString);
+	c(funcDD.toString());
 
-	/*while(countLoop<100){
+/*	while(countLoop<100){
 		step = computeStep(countLoop);
 		if(step < 0.01){
 			step = 0.01;
@@ -76,7 +79,11 @@ function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
 		if(step < 0.1){
 			step = 0.1;
 		}
+
 		countLoop += step;
+		if(countLoop>-1&&countLoop<1){
+			c(countLoop + " " + step);
+		}
 		if (_f(countLoop) === 0){
 			_resultAry.push(0.0);
 		}

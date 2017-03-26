@@ -110,14 +110,27 @@ Groupe N°5:
 	let functionString2 = 'x/(1-x^2)';
 
 	final(functionString,f);
-	final(functionString2,f2);
+	final2(functionString2,f2);
 
 
 	function final(_functionString,_f){
 		let tabBornes = new Array();
 		let tabResultat = new Array();
 		explore2(1, _f, tabBornes, tabResultat,_functionString);
-		getZeros(tabResultat, tabBornes,  0.1**10, f);
+		getZeros(tabResultat, tabBornes,  0.1**10, _f);
+
+
+		c("bornes : ");
+		printDoubleAry(tabBornes);
+		c("resultats : ");
+		printAry(tabResultat);
+	}
+
+	function final2(_functionString,_f){
+		let tabBornes = new Array();
+		let tabResultat = new Array();
+		explore(0.1, _f, tabBornes, tabResultat);
+		getZeros(tabResultat, tabBornes,  0.1**10, _f);
 
 
 		c("bornes : ");
