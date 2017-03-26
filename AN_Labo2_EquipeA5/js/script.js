@@ -79,24 +79,39 @@ function printAry(_ary){ /* de la chiasse aussi */
 function f(_x){
 	return (Math.sin(_x) - (_x/3));
 }
-
+function computefM(_function){
+	let h = math.parse(_function);
+	return h;
+}
+function computefMValue(_function,_x){
+	return _function.eval({x:_x});
+}
 /*function fM(_x){
 	let h = math.parse('sin(x)-x/3');
 	return h.eval({x: _x});
-}*/
+}
 function fM(_x){
 	return (Math.sin(_x) - (_x/3));
-}
+}*/
 //function with the derivate math
+function computedfM(_function){
+	let h = math.parse(_function);
+	let x = math.parse('x');
+	let dh = math.derivative(h, x);
+	return dh;
+}
+function computedfMValue(_function,_x){
+	return _function.eval({x: _x});
+}
 /*function dfM(_x){
 	let h = math.parse('sin(x)-x/3');
 	let x = math.parse('x');
 	let dh = math.derivative(h, x);
 	return dh.eval({x: _x});
-}*/
+}
 function dfM(_x){
 	return (Math.cos(_x) - (1/3));
-}
+}*/
 //function with the double derivate
 /*function ddfM(_x){
 	let h = math.parse('sin(x)-x/3');
@@ -107,6 +122,17 @@ function dfM(_x){
 }*/
 function ddfM(_x){
 	return -Math.sin(_x);
+}
+
+function computeddfM(_function){
+	let h = math.parse(_function);
+	let x = math.parse('x');
+	let dh = math.derivative(h, x);
+	let ddh = math.derivative(dh, x);
+	return ddh;
+}
+function computeddfMValue(_function,_x){
+	return _function.eval({x: _x});
 }
 
 
@@ -131,5 +157,12 @@ function c(data){   /* le truc à Anthony */
 
 function computeStep(_x){
 	let temp = (2/(Math.pow(2,-ddfM(_x)*fM(_x))+1))*(2/(Math.pow(2,-dfM(_x)*fM(_x))+1));
+	return temp;
+}
+function computeStep2(_x,_func,_funcD,_funcDD){
+	let resFunc = computefMValue(_func,_x);
+	let resFuncD = computedfMValue(_funcD,_x);
+	let resFuncDD = computeddfMValue(_funcDD,_x);
+	let temp = (2/(Math.pow(2,-resFuncDD*resFunc)+1))*(2/(Math.pow(2,-resFuncD*resFunc)+1));
 	return temp;
 }
