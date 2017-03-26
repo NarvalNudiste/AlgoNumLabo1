@@ -42,17 +42,32 @@ function explore(_step, _f, _bornesAry, _resultAry){  /*explore la fonction et s
 	}
 }
 
-function explore2(_step, _f, _bornesAry, _resultAry){
+function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
 
 	let countLoop = -100;
 	let step =0;
 
-	let func = computefM('sin(x)-x/3');
-	let funcD = computedfM('sin(x)-x/3');
-	let funcDD = computeddfM('sin(x)-x/3');
+	let func = computefM(_funcString);
+	let funcD = computedfM(_funcString);
+	let funcDD = computeddfM(_funcString);
+
+	/*while(countLoop<100){
+		step = computeStep(countLoop);
+		if(step < 0.01){
+			step = 0.01;
+		}
+		countLoop += step;
+		//c(countLoop);
+		if (_f(countLoop) === 0){
+			_resultAry.push(0.0);
+		}
+		if ((_f(countLoop) > 0 && _f(countLoop+step) < 0) || (_f(countLoop) < 0 && _f(countLoop+step) > 0)) {
+			_bornesAry.push(new Array(countLoop, countLoop+step));
+		}
+	}*/
 
 	while(countLoop<100){
-		step = computeStep(toto);
+		step = computeStep2(countLoop,func,funcD,funcDD);
 		if(step < 0.1){
 			step = 0.1;
 		}
@@ -65,16 +80,6 @@ function explore2(_step, _f, _bornesAry, _resultAry){
 			_bornesAry.push(new Array(countLoop, countLoop+step));
 		}
 	}
-
-	/*while(toto<100){
-		nbLoop++;
-		step = computeStep2(toto,func,funcD,funcDD);
-		if(step < 0.01){
-			step = 0.01;
-		}
-		toto += step;
-		//	c(toto);
-	}*/
 }
 
 /*
