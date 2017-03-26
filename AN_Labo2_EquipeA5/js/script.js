@@ -27,7 +27,7 @@ function dich(a,b,epsilon, laFonction, id){
 	}
 	//  c("medianne # "+ id + " : " + mnew);
 	else{
-		return mnew;	
+		return mnew;
 	}
 }
 
@@ -77,7 +77,6 @@ function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
 			step = 0.1;
 		}
 		countLoop += step;
-		//c(countLoop);
 		if (_f(countLoop) === 0){
 			_resultAry.push(0.0);
 		}

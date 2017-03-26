@@ -26,18 +26,17 @@
 	/*let toto = -100;
 	let temp =0;
 	let nbLoop = 0;
-	
-	let functionString = 'sin(x)-x/3';
-	let functionString2 = 'x/(1-x^2)';
-	
+
+
+
 	let func = computefM(functionString);
 	let funcD = computedfM(functionString);
 	let funcDD = computeddfM(functionString);
-	
+
 	let func2 = computefM(functionString2);
 	let func2D = computedfM(functionString2);
 	let func2DD = computeddfM(functionString2);
-	
+
 	while(toto<100){
 		nbLoop++;
 		temp = computeStep(toto);
@@ -60,27 +59,26 @@
 	}
 	c(nbLoop);*/
 
-	/*var tabBornes = new Array();
-	var tabResultat = new Array();
-	explore(1, f2, tabBornes, tabResultat);
-	getZeros(tabResultat, tabBornes,  0.1**10, f2);
+
+	let functionString = 'sin(x)-x/3';
+	let functionString2 = 'x/(1-x^2)';
+
+	final(functionString,f);
+	final(functionString2,f2);
 
 
-	c("bornes : ");
-	printDoubleAry(tabBornes);
-	c("resultats : ");
-	printAry(tabResultat);*/
-
-	var tabBornes = new Array();
-	var tabResultat = new Array();
-	explore2(1, f, tabBornes, tabResultat,'sin(x)-x/3');
-	getZeros(tabResultat, tabBornes,  0.1**10, f);
+	function final(_functionString,_f){
+		let tabBornes = new Array();
+		let tabResultat = new Array();
+		explore2(1, _f, tabBornes, tabResultat,_functionString);
+		getZeros(tabResultat, tabBornes,  0.1**10, f);
 
 
-	c("bornes : ");
-	printDoubleAry(tabBornes);
-	c("resultats : ");
-	printAry(tabResultat);
+		c("bornes : ");
+		printDoubleAry(tabBornes);
+		c("resultats : ");
+		printAry(tabResultat);
+	}
 
 	</script>
 </body>
