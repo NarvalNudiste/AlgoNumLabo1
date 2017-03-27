@@ -55,11 +55,16 @@ function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
 	let func = computefM(_funcString);
 	let funcD = computedfM(_funcString);
 	let funcDD = computeddfM(_funcString);
-
+let countTemp =0;
+let countTemp2=0;
 	while(countLoop<100){
 		step = computeStep2(countLoop,func,funcD,funcDD);
-		if(step < 0.1){
-			step = 0.1;
+		if(step < 0.01){
+			step = 0.01;
+			countTemp++;
+		}
+		else{
+			countTemp2++;
 		}
 
 		countLoop += step;
@@ -73,6 +78,7 @@ function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
 			_bornesAry.push(new Array(countLoop, countLoop+step));
 		}
 	}
+	c(countTemp + " " + countTemp2);
 }
 
 /*
