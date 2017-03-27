@@ -25,6 +25,10 @@ function dich(a,b,epsilon, laFonction, id){
 		return "Asymptote verticale en x = " + mnew;
 	}
 	else{
+		if(mnew < 0.1**8 && mnew > -(0.1**8))
+		{
+			mnew = 0;
+		}
 		return "x = " + mnew;
 	}
 }
@@ -137,7 +141,7 @@ function computefM(_function){
 	return h;
 }
 /*
-*	Compute the derivate of the function past in paramters
+*	Compute the derivate of the function past in parameters
 */
 function computedfM(_function){
 	let h = math.parse(_function);
@@ -147,7 +151,7 @@ function computedfM(_function){
 }
 
 /*
-*	Comptute the double derivate of the function past in paramters
+*	Comptute the double derivate of the function past in parameters
 */
 function computeddfM(_function){
 	let h = math.parse(_function);
@@ -180,7 +184,7 @@ function f2(_x){
 /*
 *	Function to print value in the console
 */
-function c(data){   /* le truc à Anthony */
+function c(data){
 	console.log(data);
 }
 
