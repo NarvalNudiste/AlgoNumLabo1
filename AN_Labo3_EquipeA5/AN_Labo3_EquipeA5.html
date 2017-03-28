@@ -9,34 +9,109 @@ Groupe N°5:
 - Feuillade Julien
 -->
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Algorithme numérique - Labo 3 - Equipe A5</title> 
-    </head>
-    <body>
-        <div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
-            <h1>Algorithme numérique - Labo 3</h1>
-            <h2>Equipe A5</h2>
-            <h3>Deni Gahlinger - Julien Feuillade - Anthony Gillioz - Guillaume Noguera</h3>
-        </div>
-        <pre>
-        <script>
-            A = [[1, 1, 1], [2, 1, 2], [1, 2, 3]];
-            document.writeln(A);
-            
-            function swap(A,i1,i2)
-            {
-                let tmp = A[i1];
-                A[i1] = A[i2];
-                A[i2] = tmp;
-                
-                return A;
-            }
+<head>
+	<meta charset="UTF-8">
+	<title>Algorithme numérique - Labo 3 - Equipe A5</title>
+</head>
+<body>
+	<div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
+		<h1>Algorithme numérique - Labo 3</h1>
+		<h2>Equipe A5</h2>
+		<h3>Deni Gahlinger - Julien Feuillade - Anthony Gillioz - Guillaume Noguera</h3>
+	</div>
+	<pre>
+		<script>
+		A = [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3],[4, 4, 4, 4]];
+		B = [4, 5, 6];
+		document.writeln(A);
 
-            swap(A, 0, 1);
-            
-            document.writeln(A);
-        </script>
-        </pre>
-    </body>
+		function swap(matrix, i1, i2)
+		{
+			let tmp = matrix[i1];
+			matrix[i1] = matrix[i2];
+			matrix[i2] = tmp;
+
+			return matrix;
+		}
+
+		function setOrderMatrix(matrixA, matrixB, n){
+			let swapLine;
+			for(let i = 0; i < n; i++){
+				if(matrixA[i][i] === 0){
+					swapLine = search(matrixA, i, n);
+					if(swapLine != false){
+						swap(matrixA, i, swapLine);
+						swap(matrixB, i, swapLine);
+					}
+				}
+			}
+		}
+
+		function search(matrix, i, n){
+			let j = i;
+			for(let j = i; j < n; j++){
+				if(matrix[j][i]!=0){
+					c("J trouvé : " + j);
+					return j;
+				}
+			}
+			c("J non trouvé");
+			return false;
+		}
+
+		/*function eliminate(matrixA, matrixB, n){
+			let denominateur, nominateur, tempB;
+			for(let i = 0; i < n; i ++){
+				denominateur = matrixA[i][i];
+				tempB = matrixB[i];
+				//c(i);
+				for(let j = i+1; j <= n; j++){
+				//	c("i " + i + " j " + j);
+					nominateur = matrixA[j][i];
+					matrixA[j][i] = 0;
+					for(let k = i+1; k <= n; k++){
+						c("i " + i + " j " + j + " k " + k);
+						matrixA[j][k] = matrixA[j][k] - (nominateur/denominateur)*matrixA[i][k];
+					}
+					matrixB[j] = matrixB[j] - (nominateur/denominateur)*tempB;
+				}
+				c("++++++++++");
+			}
+		}*/
+
+		function eliminate(matrixA, matrixB, n){
+			let denominateur, nominateur, tempB;
+			for(let i = 0; i < n; i ++){
+				//let i =0;
+				denominateur = matrixA[i][i];
+				tempB = matrixB[i];
+				//c(i);
+				for(let j = i+1; j <= n-1; j++){
+					c(matrixA[j][i]);
+					c(j+ " " + i);
+					nominateur = matrixA[j][i];
+					matrixA[j][i] = 0;
+					for(let k = i+1; k <= n-1; k++){
+						c("i " + i + " j " + j + " k " + k);
+						c(matrixA[j][k] + " - " + (nominateur/denominateur)*matrixA[i][k]);
+						matrixA[j][k] = matrixA[j][k] - (denominateur/nominateur)*matrixA[i][k];
+					}
+					matrixB[j] = matrixB[j] - (nominateur/denominateur)*tempB;
+				}
+				c("++++++++++");
+			}
+		}
+
+		//setOrderMatrix(A,B,3);
+		eliminate(A,B,4);
+		document.writeln(A);
+		function c(data){
+			console.log(data);
+		}
+
+
+	//	document.writeln(A);
+		</script>
+	</pre>
+</body>
 </html>
