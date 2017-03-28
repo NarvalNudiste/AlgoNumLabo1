@@ -1,14 +1,42 @@
-<html>
 <!DOCTYPE html>
-<head>
-<meta charset="UTF-8">
-<title>Algorithme numérique - Labo 3 - Equipe A5</title> 
-</head>
-<body>
-<div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
-	<h1>Algorithme numérique - Labo 3</h1>
-	<h2>Equipe A5</h2>
-	<h3>Deni Gahlinger - Julien Feuillade - Anthony Gillioz - Guillaume Noguera</h3>
-</div>
-</body>
-</html>:
+<!--
+Algo Num - Labo 2
+
+Groupe N°5:
+- Gillioz Anthony
+- Noguera Guillaume
+- Gahlinger Deni
+- Feuillade Julien
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Algorithme numérique - Labo 3 - Equipe A5</title> 
+    </head>
+    <body>
+        <div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
+            <h1>Algorithme numérique - Labo 3</h1>
+            <h2>Equipe A5</h2>
+            <h3>Deni Gahlinger - Julien Feuillade - Anthony Gillioz - Guillaume Noguera</h3>
+        </div>
+        <pre>
+        <script>
+            A = [[1, 1, 1], [2, 1, 2], [1, 2, 3]];
+            document.writeln(A);
+            
+            function swap(A,i1,i2)
+            {
+                let tmp = A[i1];
+                A[i1] = A[i2];
+                A[i2] = tmp;
+                
+                return A;
+            }
+
+            swap(A, 0, 1);
+            
+            document.writeln(A);
+        </script>
+        </pre>
+    </body>
+</html>
