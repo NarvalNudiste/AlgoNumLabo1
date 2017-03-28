@@ -10,7 +10,6 @@ function dich(a,b,epsilon, laFonction, id){
 	let mold = 2*mnew;
 	let fm;
 	while (Math.abs(mnew - mold) > epsilon){
-		//  c(Math.abs(mnew-mold));
 		mold = mnew;
 		mnew = (a+b)/2;
 		fm = laFonction(mnew);
@@ -25,21 +24,30 @@ function dich(a,b,epsilon, laFonction, id){
 	if (laFonction(mnew) > asymptLimit || laFonction(mnew) < -asymptLimit){
 		return "Asymptote verticale en x = " + mnew;
 	}
-	//  c("medianne # "+ id + " : " + mnew);
 	else{
+		if(mnew < 0.1**8 && mnew > -(0.1**8))
+		{
+			mnew = 0;
+		}
 		return "x = " + mnew;
 	}
 }
 
 /*
-*	Function to explore the range, this function is used to found all the values where the function past in parameters touch zero
+*	Function to explore the range, this function is used to found all the values where the function past in parameters touch zero.
+*	This function use a constant step and we used this function for a disctontinuous function.
 *
+*	Arguments :	_step (The size of the step)
+*				_f (the mathematical function to explore)
+*				_bornesAry (the array where the bornes will be store)
+*				_resultAry (the array where the mathematical function touch zero)
 *
+*	Returns :		nothing
 */
-function explore(_step, _f, _bornesAry, _resultAry){  /*explore la fonction et stocke les bornes à explorer dans un tableau; les zéros ainsi découvert sont également insérés dans _resultAry */
+function explore(_step, _f, _bornesAry, _resultAry){
 	for (i = -100; i < 99; i+= _step){
 		if (_f(i) === 0.0){
-			_resultAry.push(0.0);
+			_resultAry.push("x = " +0.0);
 		}
 		if ((_f(i) > 0 && _f(i+_step) < 0) || (_f(i) < 0 && _f(i+_step) > 0)) {
 			_bornesAry.push(new Array(i, i+1));
@@ -47,7 +55,18 @@ function explore(_step, _f, _bornesAry, _resultAry){  /*explore la fonction et s
 	}
 }
 
-function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
+/*
+*	Function to explore the range, this function is used to found all the values where the function past in parameters touch zero.
+*	This function use a variant step, this step is compute with our formula, see the computeStep() function.
+*
+*	Arguments :	_f (the mathematical function to explore)
+*				_bornesAry (the array where the bornes will be store)
+*				_resultAry (the array where the mathematical function touch zero)
+*				_funcString (the mathematical function on string form to compute the derivate)
+*
+*	Returns :		nothing
+*/
+function explore2( _f, _bornesAry, _resultAry,_funcString){
 
 	let countLoop = -100;
 	let step =0;
@@ -57,17 +76,16 @@ function explore2(_step, _f, _bornesAry, _resultAry,_funcString){
 	let funcDD = computeddfM(_funcString);
 
 	while(countLoop<100){
-		step = computeStep2(countLoop,func,funcD,funcDD);
+		step = computeStep(countLoop,func,funcD,funcDD);
 		if(step < 0.1){
 			step = 0.1;
 		}
-
 		countLoop += step;
 		if(countLoop>-1&&countLoop<1){
 			c(countLoop + " " + step);
 		}
 		if (_f(countLoop) === 0){
-			_resultAry.push(0.0);
+			_resultAry.push("x = " +0.0);
 		}
 		if ((_f(countLoop) > 0 && _f(countLoop+step) < 0) || (_f(countLoop) < 0 && _f(countLoop+step) > 0)) {
 			_bornesAry.push(new Array(countLoop, countLoop+step));
@@ -92,18 +110,55 @@ function getZeros(_resultAry, _limitAry,  _epsilon, _f){
 	}
 }
 
-function printDoubleAry(_ary){ /* de la chiasse */
+/*
+*	Print the double array past in paramters
+*/
+function printDoubleAry(_ary){
 	for (i = 0; i < _ary.length; i ++){
 		data = i + ": [" + _ary[i][0] + ";" + _ary[i][1] + "] ";
 		c(data);
 	}
 }
-function printAry(_ary){ /* de la chiasse aussi */
+/*
+*	Print the array past in paramters
+*/
+function printAry(_ary){
 	for (i = 0; i < _ary.length; i ++){
 		data = i + ": [" + _ary[i] + "] ";
 		c(data);
 		document.writeln(data);
 	}
+}
+
+
+
+function computefMValue(_function,_x){
+	return _function.eval({x:_x});
+}
+
+function computefM(_function){
+	let h = math.parse(_function);
+	return h;
+}
+/*
+*	Compute the derivate of the function past in parameters
+*/
+function computedfM(_function){
+	let h = math.parse(_function);
+	let x = math.parse('x');
+	let dh = math.derivative(h, x);
+	return dh;
+}
+
+/*
+*	Comptute the double derivate of the function past in parameters
+*/
+function computeddfM(_function){
+	let h = math.parse(_function);
+	let x = math.parse('x');
+	let dh = math.derivative(h, x);
+	let ddh = math.derivative(dh, x);
+	return ddh;
 }
 
 /*
@@ -115,47 +170,6 @@ function printAry(_ary){ /* de la chiasse aussi */
 function f(_x){
 	return (Math.sin(_x) - (_x/3));
 }
-function computefM(_function){
-	let h = math.parse(_function);
-	return h;
-}
-function computefMValue(_function,_x){
-	return _function.eval({x:_x});
-}
-
-function fM(_x){
-	return (Math.sin(_x) - (_x/3));
-}
-//function with the derivate math
-function computedfM(_function){
-	let h = math.parse(_function);
-	let x = math.parse('x');
-	let dh = math.derivative(h, x);
-	return dh;
-}
-function computedfMValue(_function,_x){
-	return _function.eval({x: _x});
-}
-
-function dfM(_x){
-	return (Math.cos(_x) - (1/3));
-}
-//function with the double derivate
-function ddfM(_x){
-	return -Math.sin(_x);
-}
-
-function computeddfM(_function){
-	let h = math.parse(_function);
-	let x = math.parse('x');
-	let dh = math.derivative(h, x);
-	let ddh = math.derivative(dh, x);
-	return ddh;
-}
-function computeddfMValue(_function,_x){
-	return _function.eval({x: _x});
-}
-
 
 /*
 *	Second function of the laboratory
@@ -170,20 +184,19 @@ function f2(_x){
 /*
 *	Function to print value in the console
 */
-function c(data){   /* le truc à Anthony */
+function c(data){
 	console.log(data);
 }
 
 
-
-function computeStep(_x){
-	let temp = (2/(Math.pow(2,-ddfM(_x)*fM(_x))+1))*(2/(Math.pow(2,-dfM(_x)*fM(_x))+1));
-	return temp;
-}
-function computeStep2(_x,_func,_funcD,_funcDD){
+/*
+*	This function is used to compute the step for our explore2 function.
+*	We are using our formula to compute this step and in this formula we need the function, the derivate of the function and the double derivate.
+*/
+function computeStep(_x,_func,_funcD,_funcDD){
 	let resFunc = computefMValue(_func,_x);
-	let resFuncD = computedfMValue(_funcD,_x);
-	let resFuncDD = computeddfMValue(_funcDD,_x);
+	let resFuncD = computefMValue(_funcD,_x);
+	let resFuncDD = computefMValue(_funcDD,_x);
 	let temp = (2/(Math.pow(2,-resFuncDD*resFunc)+1))*(2/(Math.pow(2,-resFuncD*resFunc)+1));
 	return temp;
 }
