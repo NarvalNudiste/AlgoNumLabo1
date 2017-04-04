@@ -12,6 +12,7 @@ Groupe N°5:
 <head>
 	<meta charset="UTF-8">
 	<title>Algorithme numérique - Labo 3 - Equipe A5</title>
+	<script type="text/javascript" src="js/finalComputation.js"></script>
 </head>
 <body>
 	<div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
@@ -21,9 +22,11 @@ Groupe N°5:
 	</div>
 	<pre>
 		<script>
-		A = [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3],[4, 4, 4, 4]];
-		B = [4, 5, 6];
+		A = [[1, 1, 1, 1], [0, 1, 1, 1], [0, 0, 1, 1],[0, 0, 0, 1]];
+		B = [4, 3, 2, 1];
 		document.writeln(A);
+		
+		finalComputation(A,B);
 
 		function swap(matrix, i1, i2)
 		{
