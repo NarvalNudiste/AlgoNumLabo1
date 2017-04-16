@@ -94,19 +94,12 @@ function testParse(){
 	alert("test");
 }
 
-
-/*var matrix = json.getMatrix();
-var size = json.getMatrixSize();
-var results = json.getMatrixResultColumn();
-printMatrix(matrix);
-printResults(results);*/
 json = new jsonParser();
 
 var A;
 var B;
 
 var text;
-
 
 window.onload = function() {
 		var fileInput = document.getElementById('fileInput');
@@ -174,7 +167,7 @@ function computeMatrix(){
 *				i1 (the first line to swap)
 *				i2 (the second line to swap)
 *
-*	Returns :		nothing
+*	Returns :		the new matrix with the line swap
 */
 function swap(matrix, i1, i2)
 {
@@ -184,8 +177,14 @@ function swap(matrix, i1, i2)
 
 	return matrix;
 }
+
 /*
-*	return false if the matrixA has no answer
+*	function to change the line if there is a 0 on the diagonal
+*
+*	Arguments :	matrixA,matrixB (the two matrix for the triangularisation)
+*				n (the size of the matrix)
+*
+*	Returns :		nothing if there no problems and false if there is a row with 0
 */
 function setOrderMatrix(matrixA, matrixB, n){
 	let swapLine;
@@ -223,12 +222,10 @@ function search(matrix, i, n){
 }
 
 /*
-*	This function will
+*	This function will render a triangular matrix
 *
-*	Arguments :	_step (The size of the step)
-*				_f (the mathematical function to explore)
-*				_bornesAry (the array where the bornes will be store)
-*				_resultAry (the array where the mathematical function touch zero)
+*	Arguments :	matrixA,matrixB (the two matrix for the triangularisation)
+*				n (the size of the matrix)
 *
 *	Returns :		nothing
 */
@@ -254,7 +251,13 @@ function eliminate(matrixA, matrixB, n){
 	}
 }
 
-
+/*
+*	This function will compute the value of the vector and put the answer in a string
+*
+*	Arguments :	matrix, vector(for the computation)
+*
+*	Returns :		the string with the results
+*/
 function finalComputation(matrice, vector)
 {
 	var resultString = "<h2>Résulats :</h2> </br>";
