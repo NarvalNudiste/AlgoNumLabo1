@@ -102,6 +102,9 @@ printMatrix(matrix);
 printResults(results);*/
 json = new jsonParser();
 
+var A;
+var B;
+
 
 window.onload = function() {
 		var fileInput = document.getElementById('fileInput');
@@ -118,10 +121,10 @@ window.onload = function() {
 					//fileDisplayArea.innerText = reader.result;
 
 					json.text = reader.result;
-					let matrix = json.getMatrix();
-					let vector = json.getMatrixResultColumn();
-					printMatrix(matrix);
-					console.log(vector);
+					A = json.getMatrix();
+					B = json.getMatrixResultColumn();
+
+					/**/
 				}
 
 				reader.readAsText(file);
@@ -129,4 +132,74 @@ window.onload = function() {
 				fileDisplayArea.innerText = "File not supported!"
 			}
 		});
+}
+function computeMatrix(){
+	setOrderMatrix(A,B,A.length);
+
+	eliminate(A,B,A.length);
+
+	finalComputation(A, B);
+}
+
+function swap(matrix, i1, i2)
+{
+	let tmp = matrix[i1];
+	matrix[i1] = matrix[i2];
+	matrix[i2] = tmp;
+
+	return matrix;
+}
+
+function setOrderMatrix(matrixA, matrixB, n){
+	let swapLine;
+	for(let i = 0; i < n; i++){
+		if(matrixA[i][i] === 0){
+			swapLine = search(matrixA, i, n);
+			if(swapLine != false){
+				swap(matrixA, i, swapLine);
+				swap(matrixB, i, swapLine);
+			}
+		}
+	}
+}
+
+function search(matrix, i, n){
+	let j;
+	for(j = i; j < n; j++){
+		if(matrix[j][i]!=0){
+			//c("J trouvé : " + j);
+			return j;
+		}
+	}
+	//c("J non trouvé");
+	return false;
+}
+
+
+function eliminate(matrixA, matrixB, n){
+	let i,j,k;
+	for (i=0; i < matrixA.length; i++) {
+		matrixA[i].push(matrixB[i]);
+	}
+	for(i = 0; i < n; i ++){
+		for(k = i+1; k < n; k++){
+			let c = -matrixA[k][i]/matrixA[i][i];
+			for(j = i; j < n+1; j++){
+				if(i===j){
+					matrixA[k][j]=0;
+				}else{
+					matrixA[k][j] += c * matrixA[i][j];
+				}
+			}
+		}
+	}
+	for (i=0; i < matrixA.length; i++) {
+		matrixB[i]=matrixA[i].pop();
+	}
+}
+
+function showMatrix(A){
+	for (i=0; i < A.length; i++) {
+		console.log(A[i]);
+	}
 }
