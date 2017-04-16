@@ -1,3 +1,6 @@
+/* Basic class for extracting a matrix by parsing a json file.
+* ctor args : none
+ */
 class jsonParser{
 	constructor(){
 	this.text = "";
@@ -5,20 +8,12 @@ class jsonParser{
 
 	}
 
-	readJsonFile(path){
-		var reader = new FileReader();
-		reader.onload = function(e) {
-		var input = reader.result;
-	}
-	reader.readAsText(path, encoding);
-	}
-
-	setDefault(){
-		this.text = '{"n": [3], "A": [3.0,4.0,-1.0,1.0,-1.0,2.0,2.0,3.0,4.0],"B": [23.0,3.0,7.0]}';
-	}
-	/*Parses the json matrix actually selected
-		returns : a double array containing the matrix */
-
+	/* Parses the matrix actually contained in the json file.
+	*
+	*  Args : none
+	*
+	*  Returns : a double array containing the matrix
+	*/
 	getMatrix(){
 		let temp = JSON.parse(this.text);
 		this.matrixSize = temp.n;
@@ -32,13 +27,26 @@ class jsonParser{
 				ary[i].push(temp.A[count]);
 				count++;
 			}
-
 		}
 		return ary;
 	}
+
+	/* QoL getter
+	*
+	*  Args : none
+	*
+	*  Returns : the matrix size.
+	*/
 	getMatrixSize(){
 		return this.matrixSize;
 	}
+
+	/* Parses the vector actually contained in the json file.
+	*
+	*  Args : none
+  *
+	*	 Returns : a double array containing the matrix
+	*/
 	getMatrixResultColumn(){
 		let ary = new Array();
 		let temp = JSON.parse(this.text);
@@ -50,6 +58,12 @@ class jsonParser{
 	}
 }
 
+/* Used in debugging, logs the matrix in a more convenient way
+*
+*  Args: _a (the matrix to print)
+*
+*  Returns : nothing
+*/
 function printMatrix(_a){
 	let oi = 0
 	let text = "";
@@ -81,7 +95,14 @@ function printMatrix(_a){
 		text = "";
 	}
 }
+//end of class
 
+/* Same as printMatrix, used for simple arrays
+*
+* Args: _a(the vector to print)
+*
+* Returns : nothing
+*/
 function printResults(_a){
 	let oi = 0;
 	for (oi ; oi < _a.length ; oi++){
@@ -89,22 +110,24 @@ function printResults(_a){
 	}
 }
 
-function testParse(){
-	console.log(document.getElementById("fileField").innerHTML);
-	alert("test");
-}
-
 json = new jsonParser();
 
+/* Variables which stock the matrix and the ad-hoc vector
+*/
 var A;
 var B;
 
+/* Variable used to display the result/error messages*/
 var text;
+
 
 window.onload = function() {
 		var fileInput = document.getElementById('fileInput');
 		var fileDisplayArea = document.getElementById('fileDisplayArea');
 
+/* Listener for json file upload, which is called by a change in fileInput field.
+*  Actually loads the matrix in variables
+*/
 		fileInput.addEventListener('change', function(e) {
 			var file = fileInput.files[0];
 			var textType = /text.*/;
@@ -113,7 +136,6 @@ window.onload = function() {
 				var reader = new FileReader();
 
 				reader.onload = function(e) {
-					//fileDisplayArea.innerText = reader.result;
 
 					json.text = reader.result;
 					A = json.getMatrix();
@@ -141,13 +163,14 @@ window.onload = function() {
 */
 function computeMatrix(){
 	var t0 = performance.now();
+	chronoZone.innerHTML = "";
 	if(!text){
 
 		let temp = setOrderMatrix(A,B,A.length);
 		if(temp != false)
 		{
 			eliminate(A,B,A.length);
-			text = finalComputation(A, B);
+			text = finalComputation(A, B, t0);
 		}
 		else
 		{
@@ -155,9 +178,8 @@ function computeMatrix(){
 		}
 	}
 
-	var t1 = performance.now();
+	//var t1 = performance.now();
 	resultArea.innerHTML = text;
-	chronoZone.innerHTML = "Computation took " + (t1 - t0) + " milliseconds.";
 }
 
 /*
@@ -255,10 +277,11 @@ function eliminate(matrixA, matrixB, n){
 *	This function will compute the value of the vector and put the answer in a string
 *
 *	Arguments :	matrix, vector(for the computation)
+*						  _t0 : the time elapsed since the operation started, to avoid taking display time into account when timing computation time
 *
 *	Returns :		the string with the results
 */
-function finalComputation(matrice, vector)
+function finalComputation(matrice, vector, _t0)
 {
 	var resultString = "<h2>Résulats :</h2> </br>";
 	if(vector.length != matrice.length)
@@ -293,6 +316,7 @@ function finalComputation(matrice, vector)
 		resultString += "</li>";
 	}
 	resultString += "</ul>";
+	var t1 = performance.now();
+	chronoZone.innerHTML = "Computation took " + (t1 - _t0) + " milliseconds.";
 	return resultString;
-
 }
