@@ -18,17 +18,17 @@ function finalComputation(matrice, vector)
 			{
 				vector[j] -= result[i]*matrice[j][i];
 			}
-			result.innerHTML('x'+i+" = " + result[i].toFixed(2));
-			/*document.write("x");
+			//result.innerHTML('x'+i+" = " + result[i].toFixed(2));
+			document.write("x");
 			document.write(i);
 			document.write(" = ");
-			document.writeln(result[i].toFixed(2));*/
+			document.writeln(result[i].toFixed(2));
 		}
 		result[0] = vector[0]/matrice[0][0];
-		/*document.write("x");
+		document.write("x");
 		document.write(i);
 		document.write(" = ");
-		document.writeln(result[i].toFixed(2));*/
-		result.innerHTML('x'+i+" = " + result[i].toFixed(2));
+		document.writeln(result[i].toFixed(2));
+		//result.innerHTML('x'+i+" = " + result[i].toFixed(2));
 	}
 }
