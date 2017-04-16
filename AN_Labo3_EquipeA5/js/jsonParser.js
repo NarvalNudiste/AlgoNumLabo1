@@ -138,6 +138,14 @@ window.onload = function() {
 			}
 		});
 }
+/*
+*	Function to compute the matrix and show the results in the html dom
+*	Take in args the global matrix A,B and the global variable text
+*
+*	Arguments :	nothing
+*
+*	Returns :		nothing
+*/
 function computeMatrix(){
 	var t0 = performance.now();
 	if(!text){
@@ -159,6 +167,15 @@ function computeMatrix(){
 	chronoZone.innerHTML = "Computation took " + (t1 - t0) + " milliseconds.";
 }
 
+/*
+*	Funtion to swap 2 lines of the matrix past in arguments.
+*
+*	Arguments :	matrix (the matrix to swap)
+*				i1 (the first line to swap)
+*				i2 (the second line to swap)
+*
+*	Returns :		nothing
+*/
 function swap(matrix, i1, i2)
 {
 	let tmp = matrix[i1];
@@ -186,6 +203,15 @@ function setOrderMatrix(matrixA, matrixB, n){
 	}
 }
 
+/*
+*	This function will search if there is a another line to swap the value if there is a 0
+*
+*	Arguments :	matrix (the matrix where to search)
+*				i (the line where to begin the search)
+*				n (the size of the matrix)
+*
+*	Returns :		the number of the line to swap if there is a valid possibility in the other way return false
+*/
 function search(matrix, i, n){
 	let j;
 	for(j = i; j < n; j++){
@@ -196,7 +222,16 @@ function search(matrix, i, n){
 	return false;
 }
 
-
+/*
+*	This function will
+*
+*	Arguments :	_step (The size of the step)
+*				_f (the mathematical function to explore)
+*				_bornesAry (the array where the bornes will be store)
+*				_resultAry (the array where the mathematical function touch zero)
+*
+*	Returns :		nothing
+*/
 function eliminate(matrixA, matrixB, n){
 	let i,j,k;
 	for (i=0; i < matrixA.length; i++) {
@@ -219,11 +254,7 @@ function eliminate(matrixA, matrixB, n){
 	}
 }
 
-function showMatrix(A){
-	for (i=0; i < A.length; i++) {
-		console.log(A[i]);
-	}
-}
+
 function finalComputation(matrice, vector)
 {
 	var resultString = "<h2>Résulats :</h2> </br>";
