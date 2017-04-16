@@ -22,13 +22,13 @@ function finalComputation(matrice, vector)
 			document.write("x");
 			document.write(i);
 			document.write(" = ");
-			document.writeln(result[i].toFixed(2));
+			document.writeln(result[i]);
 		}
 		result[0] = vector[0]/matrice[0][0];
 		document.write("x");
 		document.write(i);
 		document.write(" = ");
-		document.writeln(result[i].toFixed(2));
+		document.writeln(result[i]);
 		//result.innerHTML('x'+i+" = " + result[i].toFixed(2));
 	}
 }

@@ -133,11 +133,14 @@ window.onload = function() {
 		});
 }
 function computeMatrix(){
-	setOrderMatrix(A,B,A.length);
+	let temp = setOrderMatrix(A,B,A.length);
 
-	eliminate(A,B,A.length);
+	if(temp !=false){
+		eliminate(A,B,A.length);
 
-	finalComputation(A, B);
+		finalComputation(A, B);
+	}
+
 }
 
 function swap(matrix, i1, i2)
@@ -148,7 +151,9 @@ function swap(matrix, i1, i2)
 
 	return matrix;
 }
-
+/*
+*	return false if the matrixA has no answer
+*/
 function setOrderMatrix(matrixA, matrixB, n){
 	let swapLine;
 	for(let i = 0; i < n; i++){
@@ -157,6 +162,8 @@ function setOrderMatrix(matrixA, matrixB, n){
 			if(swapLine != false){
 				swap(matrixA, i, swapLine);
 				swap(matrixB, i, swapLine);
+			}else{
+				return false;
 			}
 		}
 	}
@@ -166,11 +173,9 @@ function search(matrix, i, n){
 	let j;
 	for(j = i; j < n; j++){
 		if(matrix[j][i]!=0){
-			//c("J trouvé : " + j);
 			return j;
 		}
 	}
-	//c("J non trouvé");
 	return false;
 }
 
