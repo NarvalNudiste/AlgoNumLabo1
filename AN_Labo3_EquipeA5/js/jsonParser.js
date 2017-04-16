@@ -133,11 +133,14 @@ window.onload = function() {
 		});
 }
 function computeMatrix(){
+	var t0 = performance.now();
+
 	setOrderMatrix(A,B,A.length);
-
 	eliminate(A,B,A.length);
-
 	finalComputation(A, B);
+
+	var t1 = performance.now();
+	chronoZone.innerHTML = "Computation took " + (t1 - t0) + " milliseconds.";
 }
 
 function swap(matrix, i1, i2)
