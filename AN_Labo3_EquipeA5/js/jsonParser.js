@@ -124,7 +124,6 @@ window.onload = function() {
 					A = json.getMatrix();
 					B = json.getMatrixResultColumn();
 
-					/**/
 				}
 
 				reader.readAsText(file);
