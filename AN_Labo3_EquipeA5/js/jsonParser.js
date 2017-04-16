@@ -105,6 +105,8 @@ json = new jsonParser();
 var A;
 var B;
 
+var text;
+
 
 window.onload = function() {
 		var fileInput = document.getElementById('fileInput');
@@ -123,7 +125,11 @@ window.onload = function() {
 					json.text = reader.result;
 					A = json.getMatrix();
 					B = json.getMatrixResultColumn();
-
+					if(A.length ===0 || B.length ===0){
+						text = "Matrice ou vecteur vide";
+					}else{
+						text ="";
+					}
 				}
 
 				reader.readAsText(file);
@@ -133,21 +139,23 @@ window.onload = function() {
 		});
 }
 function computeMatrix(){
-	let temp = setOrderMatrix(A,B,A.length);
+	var t0 = performance.now();
+	if(!text){
 
-	if(temp !=false){
-		eliminate(A,B,A.length);
-
-		finalComputation(A, B);
+		let temp = setOrderMatrix(A,B,A.length);
+		if(temp != false)
+		{
+			eliminate(A,B,A.length);
+			text = finalComputation(A, B);
+		}
+		else
+		{
+			text = "Pas de solution";
+		}
 	}
 
-	var t0 = performance.now();
-
-	setOrderMatrix(A,B,A.length);
-	eliminate(A,B,A.length);
-	finalComputation(A, B);
-
 	var t1 = performance.now();
+	resultArea.innerHTML = text;
 	chronoZone.innerHTML = "Computation took " + (t1 - t0) + " milliseconds.";
 }
 
@@ -171,6 +179,7 @@ function setOrderMatrix(matrixA, matrixB, n){
 				swap(matrixA, i, swapLine);
 				swap(matrixB, i, swapLine);
 			}else{
+				console.log("pas de réponse");
 				return false;
 			}
 		}
@@ -214,4 +223,42 @@ function showMatrix(A){
 	for (i=0; i < A.length; i++) {
 		console.log(A[i]);
 	}
+}
+function finalComputation(matrice, vector)
+{
+	var resultString = "<h2>Résulats :</h2> </br>";
+	if(vector.length != matrice.length)
+	{
+		alert("les tailles de la matrice et du vecteur ne sont pas compatibles entre elles");
+	}
+	else
+	{
+		result = [];
+		resultString += "<ul>";
+		for(i=matrice.length-1; i>0; i--)
+		{
+			result[i] = vector[i]/matrice[i][i];
+
+			for(j=i-1; j>=0; j--)
+			{
+				vector[j] -= result[i]*matrice[j][i];
+			}
+			resultString += "<li>"
+			resultString += "x";
+			resultString += i;
+			resultString += " : ";
+			resultString += result[i];
+			resultString += "</li>";
+		}
+		result[0] = vector[0]/matrice[0][0];
+		resultString += "<li>"
+		resultString += "x";
+		resultString += i;
+		resultString += " : ";
+		resultString += result[i];
+		resultString += "</li>";
+	}
+	resultString += "</ul>";
+	return resultString;
+
 }
