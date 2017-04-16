@@ -12,6 +12,7 @@ Groupe N°5:
 <head>
 	<meta charset="UTF-8">
 	<title>Algorithme numérique - Labo 3 - Equipe A5</title>
+	<script src="js/jsonParser.js"></script>
 	<script type="text/javascript" src="js/finalComputation.js"></script>
 </head>
 <body>
@@ -21,70 +22,75 @@ Groupe N°5:
 		<h3>Deni Gahlinger - Julien Feuillade - Anthony Gillioz - Guillaume Noguera</h3>
 		<h3>Méthode de résolution Gaussienne</h3>
 	</div>
-	<pre>
-		<script>
-		A = [[3.0,4.0,-1.0],
+	<div>
+		Select a text file:
+		<input type="file" id="fileInput">
+	</div>
+	<pre id="fileDisplayArea"><pre>
+		<pre>
+			<script>
+			A = [[3.0,4.0,-1.0],
 			[1.0,-1.0,2.0],
 			[2.0,3.0,4.0]];
-		B = [23.0,3.0,7.0];
+			B = [23.0,3.0,7.0];
 
-		function c(data){
-			console.log(data);
-		}
-		function swap(matrix, i1, i2)
-		{
-			let tmp = matrix[i1];
-			matrix[i1] = matrix[i2];
-			matrix[i2] = tmp;
+			function c(data){
+				console.log(data);
+			}
+			function swap(matrix, i1, i2)
+			{
+				let tmp = matrix[i1];
+				matrix[i1] = matrix[i2];
+				matrix[i2] = tmp;
 
-			return matrix;
-		}
+				return matrix;
+			}
 
-		function setOrderMatrix(matrixA, matrixB, n){
-			let swapLine;
-			for(let i = 0; i < n; i++){
-				if(matrixA[i][i] === 0){
-					swapLine = search(matrixA, i, n);
-					if(swapLine != false){
-						swap(matrixA, i, swapLine);
-						swap(matrixB, i, swapLine);
+			function setOrderMatrix(matrixA, matrixB, n){
+				let swapLine;
+				for(let i = 0; i < n; i++){
+					if(matrixA[i][i] === 0){
+						swapLine = search(matrixA, i, n);
+						if(swapLine != false){
+							swap(matrixA, i, swapLine);
+							swap(matrixB, i, swapLine);
+						}
 					}
 				}
 			}
-		}
 
-		function search(matrix, i, n){
-			let j;
-			for(j = i; j < n; j++){
-				if(matrix[j][i]!=0){
-					//c("J trouvé : " + j);
-					return j;
+			function search(matrix, i, n){
+				let j;
+				for(j = i; j < n; j++){
+					if(matrix[j][i]!=0){
+						//c("J trouvé : " + j);
+						return j;
+					}
 				}
+				//c("J non trouvé");
+				return false;
 			}
-			//c("J non trouvé");
-			return false;
+
+
+
+
+			/*function eliminate(matrixA, matrixB, n){
+			let denominateur, nominateur, tempB;
+			for(let i = 0; i < n; i ++){
+			denominateur = matrixA[i][i];
+			tempB = matrixB[i];
+			//c(i);
+			for(let j = i+1; j <= n; j++){
+			//	c("i " + i + " j " + j);
+			nominateur = matrixA[j][i];
+			matrixA[j][i] = 0;
+			for(let k = i+1; k <= n; k++){
+			c("i " + i + " j " + j + " k " + k);
+			matrixA[j][k] = matrixA[j][k] - (nominateur/denominateur)*matrixA[i][k];
 		}
-
-
-
-
-		/*function eliminate(matrixA, matrixB, n){
-		let denominateur, nominateur, tempB;
-		for(let i = 0; i < n; i ++){
-		denominateur = matrixA[i][i];
-		tempB = matrixB[i];
-		//c(i);
-		for(let j = i+1; j <= n; j++){
-		//	c("i " + i + " j " + j);
-		nominateur = matrixA[j][i];
-		matrixA[j][i] = 0;
-		for(let k = i+1; k <= n; k++){
-		c("i " + i + " j " + j + " k " + k);
-		matrixA[j][k] = matrixA[j][k] - (nominateur/denominateur)*matrixA[i][k];
+		matrixB[j] = matrixB[j] - (nominateur/denominateur)*tempB;
 	}
-	matrixB[j] = matrixB[j] - (nominateur/denominateur)*tempB;
-}
-c("++++++++++");
+	c("++++++++++");
 }
 }*/
 /*
@@ -112,7 +118,11 @@ c("++++++++++");
 }
 */
 function eliminate(matrixA, matrixB, n){
+
 	let i,j,k;
+	for (i=0; i < A.length; i++) {
+		A[i].push(B[i]);
+	}
 	for(i = 0; i < n; i ++){
 		for(k = i+1; k < n; k++){
 			let c = -matrixA[k][i]/matrixA[i][i];
@@ -125,37 +135,26 @@ function eliminate(matrixA, matrixB, n){
 			}
 		}
 	}
+
+	for (i=0; i < A.length; i++) {
+		B[i]=A[i].pop();
+	}
 }
 
 setOrderMatrix(A,B,A.length);
-//showMatrix(A);
-for (i=0; i < A.length; i++) {
-	A[i].push(B[i]);
-}
 
 document.writeln(A);
 
 eliminate(A,B,A.length);
 
-//showMatrix(A);
-
-for (i=0; i < A.length; i++) {
-	B[i]=A[i].pop();
-}
-
-//showMatrix(A);
-//showMatrix(B);
 function showMatrix(A){
 	for (i=0; i < A.length; i++) {
 		console.log(A[i]);
 	}
 }
 
-
-
 finalComputation(A, B);
 
-//	document.writeln(A);
 </script>
 </pre>
 </body>

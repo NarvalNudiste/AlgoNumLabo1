@@ -2,9 +2,9 @@ class jsonParser{
 	constructor(){
 	this.text = "";
 	this.matrixSize = 0;
-	
+
 	}
-	
+
 	readJsonFile(path){
 		var reader = new FileReader();
 		reader.onload = function(e) {
@@ -12,13 +12,13 @@ class jsonParser{
 	}
 	reader.readAsText(path, encoding);
 	}
-	
+
 	setDefault(){
 		this.text = '{"n": [3], "A": [3.0,4.0,-1.0,1.0,-1.0,2.0,2.0,3.0,4.0],"B": [23.0,3.0,7.0]}';
 	}
 	/*Parses the json matrix actually selected
 		returns : a double array containing the matrix */
-		
+
 	getMatrix(){
 		let temp = JSON.parse(this.text);
 		this.matrixSize = temp.n;
@@ -54,7 +54,7 @@ function printMatrix(_a){
 	let oi = 0
 	let text = "";
 	for (oi; oi < _a.length; oi++){
-		let oj = 0; 
+		let oj = 0;
 		text += '|';
 		for (oj ; oj < _a[oi].length; oj++){
 			if (oj == 0){
@@ -62,7 +62,7 @@ function printMatrix(_a){
 			}
 			text+= _a[oi][oj].toString();
 			if (_a[oi][oj] < 0){
-				text+=' ';			
+				text+=' ';
 			}
 			else{
 				text+= '  ';
@@ -72,7 +72,7 @@ function printMatrix(_a){
 		text+= ' |';
 		console.log(text);
 		text = '';
-		let l = 0; 
+		let l = 0;
 		text += ' ';
 		for (l = 0; l < _a.length; l++){
 			text+= '----';
@@ -83,12 +83,10 @@ function printMatrix(_a){
 }
 
 function printResults(_a){
-	let oi = 0; 
+	let oi = 0;
 	for (oi ; oi < _a.length ; oi++){
 		console.log(_a[oi]);
 	}
-	
-	
 }
 
 function testParse(){
@@ -121,14 +119,14 @@ window.onload = function() {
 
 					json.text = reader.result;
 					let matrix = json.getMatrix();
+					let vector = json.getMatrixResultColumn();
 					printMatrix(matrix);
+					console.log(vector);
 				}
 
-				reader.readAsText(file);	
+				reader.readAsText(file);
 			} else {
 				fileDisplayArea.innerText = "File not supported!"
 			}
 		});
 }
-
-
