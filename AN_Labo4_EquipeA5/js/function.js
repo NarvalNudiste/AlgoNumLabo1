@@ -1,8 +1,11 @@
 function approximateCos(_x){
 let cos = 0;
 let n = 0;
-for (let i = 0; i < 10; i++){
-	cos += Math.pow(_x,n)/facto(n) - (Math.pow(_x,n+2)/facto(n+2));
+for (let i = 0; i < 80; i++){
+	let temp = Math.pow(_x,n)/facto(n) - (Math.pow(_x,n+2)/facto(n+2));
+	if (isNaN(temp))
+		break;
+	cos += temp;
 	n+=4;
 }
 return cos;
@@ -35,22 +38,22 @@ function plotFunction()
 {
 	var h = document.getElementById("h").value;
     h = parseFloat(h);
-	
+
 	var min = 0;
 	var max = 40;
 
 	//Ajoute tes fonctions dans CosFirstDerivate et CosSecondDerivate
 	var CosFirstDerivate = derivate(approximateCos, h);
 	var CosSecondDerivate = derivate(CosFirstDerivate, h);
-	
+
 	//Remplace "TA_FONCTION_COS" par ta fonction Cosinus
 	var plotCos = plotCalculation(plotCos, approximateCos, "Cos(x)", min, max);
 
 	var plotCosFirstDerivate = plotCalculation(plotCosFirstDerivate, CosFirstDerivate, "Cos(x)'", min, max);
 	var plotCosSecondDerivate = plotCalculation(plotCosSecondDerivate, CosSecondDerivate , "Cos(x)''", min, max);
-	
+
 	var data = [plotCos, plotCosFirstDerivate, plotCosSecondDerivate];
-	
+
 	var range = {
       xaxis: {
       range: [min,max]
@@ -62,7 +65,7 @@ function plotFunction()
       },
       hovermode: 'closest'
     };
-	
+
 	Plotly.newPlot("FunctionPlot", data, range);
 }
 
