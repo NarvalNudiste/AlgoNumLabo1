@@ -7,7 +7,38 @@
 	<script src="js/function.js"></script>
 	<link href="style/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+<style>
+
+#container {
+
+position: relative;
+border:2px solid #000;
+width:220px;
+height:220px;
+}
+
+#center {
+	border-radius:50%;
+	position: absolute;
+    width:200px;
+    height:200px;
+    left:10px;
+    top:10px;
+    border:2px solid #000;
+    background: #8AC3F5;
+}
+#sat0 {
+	position: absolute;
+    width:50px;
+    height:50px;
+    border: 1px, white, solid;
+}
+#boat{
+  height: 50px;
+}
+</style>
 <body>
 <div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
 	<h1>Algorithme numérique - Labo n°4 - Dérivation numérique</h1>
@@ -26,11 +57,59 @@
 	<button onclick="plotFunction();">Afficher le graphique</button>
 
 	<script>plotFunction()</script>
-	
+
 	<h3>Problème du bateau</h3>
 	<p>
 		<!--Deni ajoute ta partie ici !-->
 	</p>
+	<div id="container">
+	  <div id="center"></div>
+	  <div id="sat0"><img src="img/boat.jpeg" alt="boat" id="boat"></div>
+	</div>
+
+
+
 </div>
+<script>
+
+var pos = $('#center').position(),
+    radiusSat = $('#sat0').width() * 0.5,
+    radius = $('#center').width() * 0.5,
+    cx = pos.left + radius,
+    cy = pos.top + radius,
+    x, y, angle = 0, angles = [],
+    spc = 360 / 5,
+    deg2rad = Math.PI / 180,
+    i = 0;
+
+for(;i < 5; i++) {
+    angles.push(angle);
+    angle += spc;
+}
+
+/// space out radius
+radius += (radiusSat-10);
+
+loop();
+
+function loop() {
+
+    for(var i = 0; i < angles.length; i++) {
+
+        angle = angles[i];
+
+        x = cx + radius * Math.cos(angle * deg2rad);
+        y = cy + radius * Math.sin(angle * deg2rad);
+
+        $('#sat' + i).css({left:x - radiusSat, top:y - radiusSat});
+
+        angles[i] = angles[i] + 1;
+        if (angles[i] > 180) angles[i] = 0;
+    }
+
+    requestAnimationFrame(loop);
+}
+
+</script>
 </body>
-</html>:
+</html>
