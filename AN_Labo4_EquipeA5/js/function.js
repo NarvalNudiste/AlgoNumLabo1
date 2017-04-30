@@ -1,7 +1,34 @@
+function approximateCos(_x, _step){
+let cos = 0;
+let n = 0;
+for (let i = 0; i < _step; i++){
+	cos += Math.pow(_x,n)/facto(n) - (Math.pow(_x,n+2)/facto(n+2));
+	n+=4;
+}
+return cos;
+}
 
-/*
-	Ajoute tes fonctions ici !!!
-*/
+function facto(_x){
+	if (_x <= 0){
+		return 1;
+	}
+	let result;
+	if (_x == 1)
+		return 1;
+	result = facto(_x-1) * _x;
+	return result;
+}
+
+function firstDerivate(_f,_h)
+{
+  var nêwFunc = function(_x)
+  {
+    return (8.0*(_f(_x+(_h/2.0))-_f(_x-(_h/2.0))) - _f(_x+_h) + _f(_x-_h))/(6*_h);
+  }
+  return nêwFunc;
+}
+
+
 
 
 function plotFunction()
