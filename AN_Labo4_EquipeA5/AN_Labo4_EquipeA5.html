@@ -2,14 +2,31 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<title>Algorithme numérique - Labo 4 - Equipe A5</title>
-<script src="js/functions.js"></script> 
+<title>Algorithme numérique - Labo 4 - Equipe A5</title> 
+	<script src="js/plotly-latest.min.js"></script>
+	<script src="js/functions.js"></script>
+	<link href="style/style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
 </head>
 <body>
 <div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
-	<h1>Algorithme numérique - Labo 4</h1>
+	<h1>Algorithme numérique - Labo n°4</h1>
 	<h2>Equipe A5</h2>
 	<h3>Deni Gahlinger - Julien Feuillade - Anthony Gillioz - Guillaume Noguera</h3>
+	
+	<br />
+	<!--Bouton pour sélectionner le h-->
+	<label for="h">Sélection du h :</label>
+	<input type="number" id="h" name="h" step="any" value="0.01"/>
+	
+	<!--Div pour l'affichage du graphe-->	
+	<div id="FunctionPlot" style="width: 1200; height:600;"></div>
+	
+	<!--Bouton de l'affichage du graphe-->
+	<button onclick="plotFunction();">Afficher le graphique</button>
+	
+	<script src="js/function.js"></script>
+	<script>plotFunction()</script>
 </div>
 </body>
 </html>:
