@@ -1,7 +1,7 @@
-function approximateCos(_x, _step){
+function approximateCos(_x){
 let cos = 0;
 let n = 0;
-for (let i = 0; i < _step; i++){
+for (let i = 0; i < 20; i++){
 	cos += Math.pow(_x,n)/facto(n) - (Math.pow(_x,n+2)/facto(n+2));
 	n+=4;
 }
@@ -40,11 +40,12 @@ function plotFunction()
 	var max = 40;
 
 	//Ajoute tes fonctions dans CosFirstDerivate et CosSecondDerivate
-	var CosFirstDerivate;
-	var CosSecondDerivate;
+	var CosFirstDerivate = firstDerivate(approximateCos);
+	var CosSecondDerivate = firstDerivate(CosFirstDerivate);
 	
 	//Remplace "TA_FONCTION_COS" par ta fonction Cosinus
-	var plotCos = plotCalculation(plotCos, "TA_FONCTION_COS", "Cos(x)", min, max);
+	var plotCos = plotCalculation(plotCos, approximateCos, "Cos(x)", min, max);
+
 	var plotCosFirstDerivate = plotCalculation(plotCosFirstDerivate, CosFirstDerivate, "Cos(x)'", min, max);
 	var plotCosSecondDerivate = plotCalculation(plotCosSecondDerivate, CosSecondDerivate , "Cos(x)''", min, max);
 	
