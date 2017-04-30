@@ -1,3 +1,10 @@
+/*
+ * Function that uses Taylor serie to approximate a cosinus function.
+ * We exploit the fact that a cosine can be represnted via the serie (1 - x^2/2! + x^4/4! - x^6/6! + x^8/8! ..)
+ * The number of steps value can be tweaked, but values in the 60-90 range seems to work pretty well
+ * Args : the base value
+ * Returns : the cosine estimation
+ */
 function approximateCos(_x){
 let cos = 0;
 let n = 0;
@@ -11,17 +18,22 @@ for (let i = 0; i < 80; i++){
 return cos;
 }
 
+/*
+ * Simple recursive function which returns the factorial sum of a number
+ * Args : the base value
+ * Returns : the sum
+ */
 function facto(_x){
-	if (_x <= 0){
+	if (_x == 1 || _x <= 0)
 		return 1;
-	}
-	let result;
-	if (_x == 1)
-		return 1;
-	result = facto(_x-1) * _x;
+	let result = facto(_x-1) * _x;
 	return result;
 }
 
+/* As seen in lecture ¯\_(ツ)_/¯
+ * Args : the base function
+ * Returns : the approximated derivative function
+ */
 function derivate(_f,_h)
 {
   var nêwFunc = function(_x)
@@ -31,9 +43,6 @@ function derivate(_f,_h)
   return nêwFunc;
 }
 
-
-
-
 function plotFunction()
 {
 	var h = document.getElementById("h").value;
@@ -42,11 +51,11 @@ function plotFunction()
 	var min = 0;
 	var max = 40;
 
-	//Ajoute tes fonctions dans CosFirstDerivate et CosSecondDerivate
+
 	var CosFirstDerivate = derivate(approximateCos, h);
 	var CosSecondDerivate = derivate(CosFirstDerivate, h);
 
-	//Remplace "TA_FONCTION_COS" par ta fonction Cosinus
+
 	var plotCos = plotCalculation(plotCos, approximateCos, "Cos(x)", min, max);
 
 	var plotCosFirstDerivate = plotCalculation(plotCosFirstDerivate, CosFirstDerivate, "Cos(x)'", min, max);
