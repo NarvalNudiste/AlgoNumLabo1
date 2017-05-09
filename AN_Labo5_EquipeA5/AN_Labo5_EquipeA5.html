@@ -1,0 +1,55 @@
+<html>
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Algorithme numérique - Labo 5 - Equipe A5</title>
+    <script src="js/function.js"></script>
+    <link href="style/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+</head>
+<script type="text/javascript">
+function f(x)
+{
+    return 1/(1+x*x);
+}
+function approximation()
+{
+
+
+    var a = 0;
+    var b = 1;
+    var h = (b - a) / 2;
+
+    var total = 0;
+    var n = 500;
+
+
+    h = (b - a) / n;
+    j = f(a);
+    var t0 = performance.now();
+    for (i = 1; i <= n - 2; i = i + 2) {
+        x = a + i * h;
+        j = j + 4 * f(x) + 2 * f(x + h)
+    }
+    j = j + 4 * f(b - h) + f(b);
+    var t1 = performance.now();
+    console.log((t1-t0).toFixed(3)+" ms");
+    console.log("pi=" + (4*(j * h / 3)).toFixed(16));
+    console.log("pi="+Math.PI.toFixed(16));
+
+}
+
+
+</script>
+<body onload="approximation()">
+    <div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
+        <h1>Algorithme numérique - Labo n°5 - Dérivation numérique</h1>
+        <h2>Equipe A5</h2>
+        <h3>Deni Gahlinger - Julien Feuillade - Anthony Gillioz - Guillaume Noguera</h3>
+        <h3>Méthode de simpson</h3>
+
+        <br />
+    </div>
+
+</body>
+</html>
