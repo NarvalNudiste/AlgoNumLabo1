@@ -14,40 +14,47 @@ function f(x)
 }
 function approximation()
 {
+    let a = 0;
+    let b = 1;
+    let n = 500;
+    let h = (b - a) / n;
+    let totalCompute = 0;
 
-
-    var a = 0;
-    var b = 1;
-    var h = (b - a) / 2;
-
-    var total = 0;
-    var n = 500;
-
-
-    h = (b - a) / n;
     j = f(a);
-    var t0 = performance.now();
-    for (i = 1; i <= n - 2; i = i + 2) {
+
+    let t0 = performance.now();
+    for (i = 1; i <= n - 2; i += 2) {
         x = a + i * h;
         j = j + 4 * f(x) + 2 * f(x + h)
     }
     j = j + 4 * f(b - h) + f(b);
-    var t1 = performance.now();
-    console.log((t1-t0).toFixed(3)+" ms");
-    console.log("pi=" + (4*(j * h / 3)).toFixed(16));
-    console.log("pi="+Math.PI.toFixed(16));
+    totalCompute = (4*(j * h / 3)).toFixed(16);
+    let t1 = performance.now();
+    let timeTotal = (t1-t0).toFixed(3);
 
+    $("result").innerHTML = "<p>Pi calculé avec la formule de Simpson : " + totalCompute + "</p>";
+    $("result").innerHTML += "<p>Pi de javascript : &nbsp;" + Math.PI.toFixed(16) + " </p>";
+    $("result").innerHTML += "<p>Temp de calcul : " + timeTotal + " milliseconds</p>";
+}
+
+function $(id)
+{
+    return document.getElementById(id);
 }
 
 
 </script>
-<body onload="approximation()">
+<body>
     <div class="center" style="width: 90.0em; margin-left: auto; margin-left: auto;">
-        <h1>Algorithme numérique - Labo n°5 - Dérivation numérique</h1>
+        <h1>Algorithme numérique - Labo n°5 - Intégration numérique</h1>
         <h2>Equipe A5</h2>
         <h3>Deni Gahlinger - Julien Feuillade - Anthony Gillioz - Guillaume Noguera</h3>
         <h3>Méthode de simpson</h3>
+        <p>Calcul d'une approximation de PI en utlisant l'intégration de la formule suivante <img src="./img/formula.png" alt="pi_integration" height="70" width="120"> avec la méthode de Simpson</p>
+        <button type="button" name="btn_compute" id="btn_compute" onclick="approximation()">Calcul</button>
+        <div id="result">
 
+        </div>
         <br />
     </div>
 
