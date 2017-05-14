@@ -9,7 +9,7 @@ window.onload = function(){
   var currentLinePosition = 0;
   var cameraPos = 0;
   var piApproxValue = 0;
-  var speed = 0.5;
+  var speed = 1.0;
 
   var scrollingRight = false;
   var scrollingLeft = false;
@@ -25,11 +25,25 @@ window.addEventListener('keydown', (event) => {
   if (keyName === 'd'){
     scrollingRight = true;
   }
-  if (keyName === 'w'){
-    speedingUp = true;
+  if (keyName === '1'){
+    speed = 1.0;
+	timer = 0.0;
   }
-  if (keyName === 's'){
-    speedingDown = true;
+  if (keyName === '2'){
+	  speed = 2.0;
+	  timer = 0.0;
+  }
+  if (keyName === '3'){
+	  speed = 4.0
+	  timer = 0.0;
+  }
+  if (keyName === '4'){
+	  speed = 10.0;
+	  timer = 0.0;
+  }
+  if (keyName === '5'){
+	  speed = 20.0;
+	  timer = 0.0;
   }
 });
 
@@ -41,12 +55,6 @@ window.addEventListener('keyup', (event) => {
   }
   if (keyName === 'd'){
     scrollingRight = false;
-  }
-  if (keyName === 'w'){
-    speedingUp = false;
-  }
-  if (keyName === 's'){
-    speedingDown = false;
   }
 });
 
@@ -98,10 +106,10 @@ window.addEventListener('keyup', (event) => {
     }
           cameraPos += speed;
           if (scrollingLeft){
-            cameraPos -= 10;
+            cameraPos -= 10*speed;
           }
           if (scrollingRight){
-            cameraPos += 10;
+            cameraPos += 10*speed;
           }
           if (speedingUp){
             speed*=2;
@@ -110,7 +118,7 @@ window.addEventListener('keyup', (event) => {
           {
             speed*=2;
           }
-  }, 1);
+  }, 0);
 }
 
 class LinePi {
