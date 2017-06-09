@@ -4,10 +4,10 @@ window.onload = function(){
   c = canvas.getContext("2d");
 
   //init the map
-  map = new Map(32, 32);
+  map = new Map(64, 64);
   // add food
-  map.ary[15][15].obstacle = false
-  map.ary[15][15].setFoodOnTile();
+  map.ary[3][3].obstacle = false
+  map.ary[3][3].setFoodOnTile();
 
   tileSizeX = canvas.width / map.width;
   tileSizeY = canvas.height / map.height
@@ -22,7 +22,7 @@ window.onload = function(){
     for (let i = 0; i < ants.length; i++){
       ants[i].update(map);
     }
-  }, 10);
+  }, 300);
 
   function drawAnthill(_x, _y){
     c.fillStyle = '#D9B44A'

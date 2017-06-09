@@ -53,6 +53,12 @@ class Map {
     }
   }
 }
+class MemoryNode {
+  constructor(_x,_y){
+    this.x = _x;
+    this.y = _y;
+  }
+}
 /*
  * Simple data structure + basic logic to implement an ant behaviour
  * logic loop implemented prior to the algorithm described at https://github.com/andreasjansson/ants_simulation
@@ -69,7 +75,9 @@ class Ant {
     this.pheromoneIncrement = 0.1;
     this.name;
     this.lastDirectionTaken;
+    this.memory = Array();
   }
+
   dropPheromone(map){
     map.ary[this.x][this.y].pheromoneValue += this.pheromoneIncrement;
   }
@@ -101,7 +109,7 @@ class Ant {
       else if (map.ary[this.x][this.y].hasPheromone()){
         //todo -> check the highest value
         this.dropPheromone(map);
-        this.walk_randomly(map);
+        //todo change this
         this.solvePosition();
       }
       /*
@@ -109,7 +117,6 @@ class Ant {
        */
       else{
         this.dropPheromone(map);
-        this.walk_randomly(map);
         this.solvePosition();
       }
     }
@@ -138,6 +145,7 @@ class Ant {
        * sense distant pheromone or walk randomly
        */
       else{
+        this.dropPheromone(map);
         this.walk_randomly(map);
         this.solvePosition();
       }
@@ -154,7 +162,21 @@ class Ant {
   /*
    * Proceed to next position
    */
+   goBackHome(){
+     if (this.memory.length > 0){
+     let temp = this.memory.pop();
+     let nextPositionX = temp.x;
+     let nextPositionY = temp.y;
+     console.log(temp.x + "; "+ temp.y)
+    this.x = this.nextPositionX;
+    this.y = this.nextPositionY;
+     }
+     else{
+       cout("error");
+     }
+   }
   solvePosition(){
+    this.memory.push(new MemoryNode(this.x, this.y));
     this.x = this.nextPositionX;
     this.y = this.nextPositionY;
   }
@@ -459,8 +481,11 @@ function init(){
   let nestY = 0;
   ants.push(new Ant(1, 1, nestX, nestY));
   ants[0].name = "Andrea";
-  ants.push(new Ant(2, 5, nestX, nestY));
-  ants[1].name = "Charles";
+
+  for (let i = 0; i < 100; i ++){
+    ants.push(new Ant(0,0, nestX, nestY));
+  }
+
 }
 var ants = Array();
 var DEBUG_MODE = false;
