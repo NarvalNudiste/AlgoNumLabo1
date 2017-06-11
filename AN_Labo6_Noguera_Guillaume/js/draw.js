@@ -18,7 +18,7 @@ window.onload = function(){
         ants[i].update(map);
       }
     }
-  }, 100);
+  }, SIMULATION_SPEED);
 
   function drawAnthill(_x, _y){
     c.fillStyle = '#D9B44A'
@@ -40,7 +40,7 @@ window.onload = function(){
         }
         if (map.ary[x][y].canBeRunnedTrough()){
           if (map.ary[x][y].hasFood){
-          c.fillStyle = 'red';
+          c.fillStyle = '#b72424';
           }
           else{
           c.fillStyle = 'rgba(149, 185, 98, ' + map.ary[x][y].pheromoneValue + ')';
