@@ -343,7 +343,7 @@ class Ant {
     }
 
   }
-
+ /* QoL func */
   convertCoordsToDirection(x,y){
     if (x > this.x){
       if (y > this.y){
@@ -388,9 +388,6 @@ class Ant {
       return map.ary[x][y];
   }
 
-  /*
-   * Proceed to next position
-   */
    goBackHomeCheating(){
      if (this.x > this.nestX){
        this.nextPositionX--;
@@ -405,6 +402,7 @@ class Ant {
        this.nextPositionY++;
      }
    }
+   /* Consumes the memory array in order to find the way back to the nest */
    goBackHome(ary){
      if (this.memory.length > 0){
      let temp = ary.pop();
@@ -476,6 +474,7 @@ class Ant {
     cout("average value : " + sum/sizeWithoutObstacle);
     return sum/sizeWithoutObstacle;
   }
+  /* Sense pherommone in a direction -> returns the ad-hoc tiles instances*/
   getDirectionValue(map, direction, range, tempAry){
     switch(direction){
       case 6:{
